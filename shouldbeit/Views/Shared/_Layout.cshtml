@@ -1,0 +1,398 @@
+﻿@{
+    var workers = ViewBag.Workers as List<Workers>;
+    var bookingCount = ViewBag.BookingCount;
+    var bookings = ViewBag.Bookings as List<Booking>;
+}
+@await Component.InvokeAsync("Notification")
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&amp;family=Roboto:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet">
+
+    <!-- Script -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://threejs.org/build/three.js"></script>
+
+
+    <!-- Vendor CSS Files -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap-icons.css" rel="stylesheet">
+    <link href="/css/all.min.css" rel="stylesheet">
+    <link href="/css/aos.css" rel="stylesheet">
+    <link href="/css/glightbox.min.css" rel="stylesheet">
+    <link href="/css/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="/css/style.css" rel="stylesheet">
+ 
+        
+   
+<style>
+    .content {
+	position: relative;
+}
+
+.content h1 {
+	color: #fff;
+	font-size: 8em;
+	position: absolute;
+	transform: translate(-50%, -50%);
+}
+
+.content h1:nth-child(1) {
+	color: transparent;
+                    -webkit-text-stroke: 2px #feb900;
+}
+
+.content h1:nth-child(2) {
+                    color: #feb900;
+	animation: animate 4s ease-in-out infinite;
+}
+
+        @@keyframes animate {
+            0%, 100% {
+                clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
+            }
+
+            50% {
+                clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+            }
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+            .dropdown .nav-link {
+                color: white;
+                transition: color 0.5s ease;
+            }
+
+            .dropdown:hover .nav-link {
+                color: white;
+            }
+
+            .dropdown ul {
+                list-style: none;
+                position: absolute;
+                min-width: 160px;
+                margin: 0;
+                padding: 0;
+                box-shadow: none; /* no box shadow */
+                z-index: 1;
+                transform: scaleY(0);
+                transform-origin: top;
+                transition: transform 0.3s ease-out;
+                opacity: 0;
+                background-color: #FEB900
+                ; /* Construction orange */
+            }
+
+            .dropdown:hover ul {
+                transform: scaleY(1);
+                opacity: 1;
+            }
+
+            .dropdown ul li {
+                padding: 12px 16px;
+                transition: background 0.3s ease, color 0.3s ease;
+            }
+
+                .dropdown ul li:hover {
+                    background-color: #808080; /* Gray for contrast */
+                    color: white; /* text color when hovered */
+                    font-family: 'Times New Roman';
+                }
+
+
+        .notification {
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 5px 10px;
+            margin-left: 10px;
+            font-size: 0.8em;
+        }
+
+
+
+    </style>
+</head>
+<body>
+    @using Microsoft.AspNetCore.Http
+    @using Thesis_web.Data;
+    @inject IHttpContextAccessor HttpContextAccessor
+    <header id="header" class="header d-flex align-items-center">
+        <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+            <a href="@Url.Action("Index", "Home")" class="logo d-flex align-items-center">
+                <div class="content">
+                <h1> 
+                        ConstructConnect
+                </h1>
+                    <h1>
+                        ConstructConnect
+                </h1>
+               </div>
+            </a>
+            <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+            <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li class="nav-item">
+                        <a class="nav-link text-white custom-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+
+                   
+                  
+                    @if (HttpContextAccessor.HttpContext.Session.GetString("user_role") == "worker")
+                    {
+                        
+                    }
+
+                   
+                 
+                    @if (HttpContextAccessor.HttpContext.Session.GetString("user_role") == "admin")
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-white custom-link" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+                        </li>
+                        <li class="dropdown">
+                            <a class="nav-link text-white custom-link" asp-area="" asp-controller="Home" asp-action="Booking">Administration</a>
+                            
+                            <ul>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Workers" asp-action="Applicants">
+                                        Applicant to be reviewed <span class="notification">@ViewBag.ApplicantsCount</span>
+                                    </a>
+                                </li>
+                              
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Workers" asp-action="Feedback">Customers' feedback <span class="notification">@ViewBag.FeedbacksCount</span>
+                                        </a>
+                                </li>
+                               
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Booking">Booking Request <span class="notification">@ViewBag.BookingCount</span>
+                                        </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Workers" asp-action="Workers">Our Team<span class="notification">@ViewBag.WorkersCount</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Users">Our Users<span class="notification">@ViewBag.UsersCount</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="AddWorker">Modify Team</a>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+                  
+                    <li class="nav-item" data-value="About Us">
+                        <a class="nav-link text-white custom-link" asp-area="" asp-controller="Home" asp-action="AboutUs">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white custom-link" asp-area="" asp-controller="Home" asp-action="Application">Join Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white custom-link" asp-area="" asp-controller="Home" asp-action="Services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white custom-link" asp-area="" asp-controller="Home" asp-action="Project">Projects</a>
+                    </li>
+                    <li class="dropdown">
+                        <a class="nav-link text-white custom-link" asp-area="" asp-controller="" asp-action="">All Pages</a>
+                        <ul>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Workers" asp-action="Workers">Our Team</a>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="FAQ">FAQ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Service_details">Service Details</a>
+                            </li>
+                           
+                        </ul>
+                    </li>
+                   
+               
+
+                    @if (HttpContextAccessor.HttpContext.Session.GetString("user_id") == null)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-white custom-link" asp-area="" asp-controller="Account" asp-action="Register">Get Started</a>
+                        </li>
+                    }
+                    <li class="nav-item">
+                        <a class="nav-link text-white custom-link" asp-area="" asp-controller="Home" asp-action="ContactUs">Contact Us</a>
+                    </li>
+                    @if (HttpContextAccessor.HttpContext.Session.GetString("user_id") != null
+                    && HttpContextAccessor.HttpContext.Session.GetString("user_role") != "admin")
+                    {
+                        <li class="dropdown">
+                            <a class="nav-link text-white custom-link">Welcome, @HttpContextAccessor.HttpContext.Session.GetString("username")!</a>
+                            <ul>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Booking">
+                                        Jobs <span class="notification">@ViewBag.JobsCount</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="MyBooking">
+                                    My Booking
+                                </a>
+                                    
+                                </li>
+                                <li class="nav-item">
+                                   
+                                    <a class="nav-link" asp-area="" asp-controller="Workers" asp-action="MyApp">
+                                        My Application
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Modify_profile">
+                                        My Profile
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-white custom-link" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                       
+                    }
+                   
+                </ul>
+                
+            </nav><!-- .navbar -->
+            <style>
+                
+
+                  
+            </style>
+               
+        </div>
+    </header><!-- End Header -->
+    <!-- ======= Breadcrumbs ======= -->
+    @{
+        if (ViewBag.ShowBreadcrumbs == true)
+        {
+            <div class="breadcrumbs d-flex align-items-center" style="background-image: url('/images/breadcrumbs-bg.jpg');">
+                <div class="container position-relative d-flex flex-column align-items-center aos-init aos-animate" data-aos="fade">
+                    <h2>@ViewBag.Title</h2>
+                    <ol>
+                        <li>
+                            <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li>@ViewBag.Title</li>
+                    </ol>
+                </div>
+            </div>
+        }
+    }
+    <!-- End Breadcrumbs -->
+    
+        <main role="main">
+            @RenderBody()
+        </main>
+
+ 
+
+    <footer id="footer" class="footer">
+
+        <div class="footer-content position-relative">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-info">
+                            <h3>ConstructConnect</h3>
+                            <p>
+                                K4/14 Bùi Hữu Nghĩa Street <br>
+                                Biên Hòa City, Đồng Nai Province, Vietnam<br><br>
+                                <strong>Phone:</strong> (+84) 85 365 9939<br>
+                                <strong>Email:</strong> huythinh2507@gmail.com<br>
+                            </p>
+                            <div class="social-links d-flex mt-3">
+                                <a href="#" class="d-flex align-items-center justify-content-center"><i class="bi bi-twitter"></i></a>
+                                <a href="#" class="d-flex align-items-center justify-content-center"><i class="bi bi-facebook"></i></a>
+                                <a href="#" class="d-flex align-items-center justify-content-center"><i class="bi bi-instagram"></i></a>
+                                <a href="#" class="d-flex align-items-center justify-content-center"><i class="bi bi-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div><!-- End footer info column-->
+
+                    <div class="col-lg-2 col-md-3 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                            <li><a href="/Home/Index">Home</a></li>
+                            <li><a href="/Home/AboutUs">About us</a></li>
+                            <li><a href="/Home/Services">Services</a></li>
+                            <li><a href="/Home/Terms_Of_Service">Terms of service</a></li>
+                            <li><a href="/Home/Privacy">Privacy policy</a></li>
+                        </ul>
+                    </div><!-- End footer links column-->
+
+                  
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-legal text-center position-relative">
+            <div class="container">
+                <div class="copyright">
+                    © Copyright <strong><span>HenryV</span></strong>. All Rights Reserved
+                </div>
+
+            </div>
+        </div>
+
+    </footer>
+
+    <a href="#" class="scroll-top d-flex align-items-center justify-content-center active"><i class="bi bi-arrow-up-short"></i></a>
+
+
+
+    <!-- Vendor JS Files -->
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/glightbox.min.js"></script>
+    <script src="/js/isotope.pkgd.min.js"></script>
+    <script src="/js/swiper-bundle.min.js"></script>
+    <script src="/js/purecounter_vanilla.js"></script>
+ 
+    <!-- Template Main JS File -->
+    <script src="/js/main.js"></script>
+    
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+ 
+
+
+</body>
+</html>

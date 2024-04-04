@@ -1,0 +1,315 @@
+﻿@{
+    ViewBag.Title = "My profile";
+    ViewBag.ShowBreadcrumbs = true;
+}
+@{
+    var failMessage = TempData["Fail"] as string;
+    if (!string.IsNullOrEmpty(failMessage))
+    {
+        <script>
+            alert('@failMessage');
+            TempData.Keep("Fail");
+
+        </script>
+    }
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        .card {
+            border: none;
+            border-radius: 1rem;
+            transition: all 0.2s;
+            background-color: #f8f9fa; /* Light gray background */
+        }
+
+            .card:hover {
+                transform: scale(1.02);
+                box-shadow: 4px 10px 10px 15px rgba(0, 0, 0, 0.3);
+            }
+
+        .form-control {
+            border: none;
+            border-radius: 1rem;
+            box-shadow: 12px 12px 22px 0px rgba(0, 0, 0, 0.1);
+        }
+
+            .form-control:focus {
+                box-shadow: none;
+                outline: none;
+            }
+
+        #sendLetter {
+            margin-bottom: 20px;
+            background: #6c757d;
+            color: #fff;
+            border-radius: 1rem;
+            padding: 1rem;
+            border: none;
+            transition: all 0.2s;
+        }
+
+            #sendLetter:hover {
+                transform: scale(1.02);
+                background: #5a6268;
+            }
+
+        .card {
+            box-shadow: 4px 4px 8px 8px rgba(0,0,0,0.4);
+        }
+
+        .margin {
+            margin-top: 20px;
+        }
+
+        .booking-card {
+            background-color: #f8f9fa;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.2s ease-in-out;
+            margin: 20px;
+        }
+
+            .booking-card:hover {
+                transform: scale(1.02);
+            }
+
+            .booking-card .member-info h4 {
+                color: #007bff;
+                margin-bottom: 10px;
+            }
+
+            .booking-card .member-info span {
+                display: block;
+                color: #6c757d;
+                margin-bottom: 10px;
+            }
+
+            .booking-card .member-info p {
+                color: #343a40;
+                margin-bottom: 10px;
+            }
+
+            .booking-card .delete-form {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+            }
+
+            .booking-card .delete-button {
+                background-color: #f8f9fa;
+                border: none;
+                color: #dc3545;
+                padding: 5px 10px;
+                font-size: 20px;
+                line-height: 1;
+                border-radius: 50%;
+            }
+
+        .edit-button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+            .edit-button:hover {
+                background-color: white;
+                color: black;
+                border: 2px solid #4CAF50;
+            }
+
+        .submit-button {
+            background-color: #008CBA; /* Blue */
+            border: none;
+            color: white;
+            padding: 10px 24px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+            .submit-button:hover {
+                background-color: white;
+                color: black;
+                border: 2px solid #008CBA;
+            }
+    </style>
+</head>
+
+<body>
+
+    <!-- ======= Header ======= -->
+
+
+    <main id="main">
+
+        <section id="team" class="team">
+            <div class="container aos-init" data-aos="fade-up">
+
+                <div class="section-header">
+                    <h2>My Profile</h2>
+                </div>
+                @inject IHttpContextAccessor HttpContextAccessor
+                @model IEnumerable<Thesis_web.Data.Signups>
+                @if (Model != null)
+                {
+                    @foreach (var users in Model)
+                    {
+                        @if (HttpContextAccessor.HttpContext.Session.GetString("email") == users.Email)
+                        {
+                            <div class="col-lg-4 col-md-6  aos-init member @users.Name.ToLower()">
+                              
+                                <div class="member-info text-center">
+
+                                    <h4>
+                                        Name: @users.Name
+                                        <button id="editNameButton" onclick="toggleEditNameForm()" class="edit-button">Edit</button>
+                                    </h4>
+
+                                    <h4>
+                                        Fields: @users.Role
+                                       
+                                    </h4>
+
+                                    <div id="editNameForm" style="display: none;">
+                                        <form asp-action="ChangeName" asp-controller="Contact" method="post" class="form">
+                                            <div class="row gy-3">
+
+                                                <div class="col-md-12">
+                                                    <input type="text" id="oldName" class="form-control" name="oldName" placeholder="Your old name" required>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <input type="text" id="newName" class="form-control" name="newName" placeholder="Your new name" required>
+                                                </div>
+                                                <div class="col-md-12 ">
+                                                    <input type="text" id="password" class="form-control" name="password" placeholder="Your password" required>
+                                                </div>
+
+
+                                                <div class="col-md-12 text-center">
+                                                    <button id="sendLetter" type="submit" class="submit-button">Submit</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+
+
+
+                                    <h4>
+                                        <button id="changePasswordButton" onclick="toggleChangePasswordForm()" class="edit-button">Change Password</button>
+                                    </h4>
+
+                                    <div id="changePasswordForm" style="display: none;">
+                                        <form asp-action="ChangePassword" asp-controller="Contact" method="post" class="form">
+                                            <div class="row gy-3">
+                                                <div class="col-md-12">
+                                                    <input type="text" id="username" class="form-control" name="username" placeholder="Your username" required>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <input type="password" id="oldPw" class="form-control" name="oldPw" placeholder="Your old password" required>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <input type="password" id="newPw" class="form-control" name="newPw" placeholder="Your new password" required>
+                                                </div>
+                                                <div class="col-md-12 text-center">
+                                                    <button id="sendLetter" type="submit" class="submit-button">Submit</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <h4 class="@users.Email.ToLower()">Email: @users.Email</h4>
+
+                                    @if (HttpContextAccessor.HttpContext.Session.GetString("user_role") == "worker")
+                                    {
+                                        @if (users.Status == "Available")
+                                        {
+                                            <p>Status: @users.Status <span style="color:green;"></span></p>
+                                        }
+                                        else
+                                        {
+                                            <p>Status: @users.Status</p>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        }
+
+                    }
+                }
+                else
+                {
+                    <p>You don't have any application.</p>
+                }
+
+
+            
+           
+
+ 
+
+
+                <script>
+                   
+
+                </script>
+            </div>
+        </section>
+
+
+        <!-- ======= Our Team Section ======= -->
+
+    </main><!-- End #main -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Initialize AOS -->
+    <script>
+        AOS.init();
+            function showEditNameForm() {
+                document.getElementById('editNameForm').style.display = 'block';
+            }
+        function toggleEditNameForm() {
+            var form = document.getElementById('editNameForm');
+            var button = document.getElementById('editNameButton');
+            if (form.style.display === 'none') {
+                form.style.display = 'block';
+                button.innerHTML = 'Close';
+            } else {
+                form.style.display = 'none';
+                button.innerHTML = 'Edit';
+            }
+        }
+        function toggleChangePasswordForm() {
+            var form = document.getElementById('changePasswordForm');
+            var button = document.getElementById('changePasswordButton');
+            if (form.style.display === 'none') {
+                form.style.display = 'block';
+                button.innerHTML = 'Close Form';
+            } else {
+                form.style.display = 'none';
+                button.innerHTML = 'Change Password';
+            }
+        }
+    </script>
+
+
+</body>
+</html>

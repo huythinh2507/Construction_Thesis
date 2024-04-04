@@ -1,0 +1,111 @@
+﻿@{
+    var successMessage = TempData["Success"] as string;
+    if (!string.IsNullOrEmpty(successMessage))
+    {
+        <script>
+            alert('@successMessage');
+            TempData.Keep("Success");
+        </script>
+    }
+}
+
+@{
+    ViewBag.ShowBreadcrumbs = true;
+    ViewBag.Title = "Join Us";
+
+}
+
+<html>
+<head>
+    <style>
+        .card {
+            border: none;
+            border-radius: 1rem;
+            transition: all 0.2s;
+            background-color: #f8f9fa; /* Light gray background */
+        }
+
+            .card:hover {
+                transform: scale(1.02);
+                box-shadow: 4px 10px 10px 15px rgba(0, 0, 0, 0.3);
+            }
+
+        .form-control {
+            border: none;
+            border-radius: 1rem;
+            box-shadow: 12px 12px 22px 0px rgba(0, 0, 0, 0.1);
+        }
+
+            .form-control:focus {
+                box-shadow: none;
+                outline: none;
+            }
+
+        #sendLetter {
+            margin-bottom: 20px;
+            background: #6c757d;
+            color: #fff;
+            border-radius: 1rem;
+            padding: 1rem;
+            border: none;
+            transition: all 0.2s;
+        }
+
+            #sendLetter:hover {
+                transform: scale(1.02);
+                background: #5a6268;
+            }
+
+        .card {
+            box-shadow: 4px 4px 8px 8px rgba(0,0,0,0.4);
+        }
+
+        .margin {
+            margin-top: 20px;
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <div class="container-fluid px-1 py-5 mx-auto">
+        <div class="row d-flex justify-content-center">
+            <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+                <div class="card">
+                    <h5 class="text-center mb-4 margin">Fill your information in the form</h5>
+                    <form asp-action="SubmitApplication" asp-controller="Contact" method="post" class="form">
+                        <div class="row gy-3">
+
+                            <div class="col-md-12">
+                                <input type="text" id="name" class="form-control" name="name" placeholder="Your name" required>
+                            </div>
+
+                            <div class="col-md-12 ">
+                                <input type="text" id="position" class="form-control" name="position" placeholder="Your position" required>
+                            </div>
+
+                            <div class="col-md-12 ">
+                                <input type="text" class="form-control" id="phone" name="phone" placeholder="Your phone number" required>
+                            </div>
+
+                            <div class="col-md-12">
+                                <textarea class="form-control" id="ImageLink" name="ImageLink" placeholder="Link to your portrait image" required></textarea>
+                            </div>
+
+                            <div class="col-md-12">
+                                <textarea class="form-control" id="Description" rows="6" name="Description" placeholder="Brief description about you" required></textarea>
+                            </div>
+
+                            <div class="col-md-12 text-center">
+                                <button id="sendLetter" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

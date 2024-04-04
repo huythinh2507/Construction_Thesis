@@ -1,0 +1,102 @@
+﻿@{
+    ViewBag.Title = "Feedbacks";
+    ViewBag.ShowBreadcrumbs = true;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        .booking-card {
+            background-color: #f8f9fa;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.2s ease-in-out;
+            margin: 20px;
+        }
+
+            .booking-card:hover {
+                transform: scale(1.02);
+            }
+
+            .booking-card .member-info h4 {
+                color: #007bff;
+                margin-bottom: 10px;
+            }
+
+            .booking-card .member-info span {
+                display: block;
+                color: #6c757d;
+                margin-bottom: 10px;
+            }
+
+            .booking-card .member-info p {
+                color: #343a40;
+                margin-bottom: 10px;
+            }
+
+            .booking-card .delete-form {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+            }
+
+            .booking-card .delete-button {
+                background-color: #f8f9fa;
+                border: none;
+                color: #dc3545;
+                padding: 5px 10px;
+                font-size: 20px;
+                line-height: 1;
+                border-radius: 50%;
+            }
+    </style>
+</head>
+
+<body>
+
+    <!-- ======= Header ======= -->
+    <main id="main">
+        <section id="team" class="team">
+            <div class="container aos-init" data-aos="fade-up">
+                <div class="section-header">
+                    <h2>Feedbacks</h2>
+                </div>
+                <div class="row gy-5">
+                    @model IEnumerable<Thesis_web.Data.Entries>
+                    @if (Model != null)
+                    {
+                        foreach (var feedback in Model)
+                        {
+                                <div class="col-lg-4 col-md-6 member aos-init booking-card">
+                                <div class="member-info">
+                                    <h4>@feedback.Name</h4>
+                                    <span>@feedback.Email</span>
+                                    <p>@feedback.Message</p>
+                                    <form asp-action="DeleteFeedback" asp-controller="Workers" asp-route-id="@feedback.Id" method="post" class="delete-form">
+                                        <button type="submit" class="btn btn-danger delete-button">X</button>
+                                    </form>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- ======= Our Team Section ======= -->
+
+    </main><!-- End #main -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Initialize AOS -->
+    <script>
+        AOS.init();
+    </script>
+</body>
+</html>

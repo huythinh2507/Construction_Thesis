@@ -1,0 +1,189 @@
+﻿@using Thesis_web.Data;
+@{
+    ViewBag.Title = "Jobs";
+    ViewBag.ShowBreadcrumbs = true;
+}
+@{
+    var workers = ViewBag.Workers as List<Workers>;
+    var bookingCount = ViewBag.BookingCount;
+    var bookings = ViewBag.Bookings as List<Booking>;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        .booking-card {
+            background-color: #f8f9fa;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.2s ease-in-out;
+            margin: 20px;
+        }
+
+            .booking-card:hover {
+                transform: scale(1.02);
+            }
+
+            .booking-card .member-info h4 {
+                color: #007bff;
+                margin-bottom: 10px;
+            }
+
+            .booking-card .member-info span {
+                display: block;
+                color: #6c757d;
+                margin-bottom: 10px;
+            }
+
+            .booking-card .member-info p {
+                color: #343a40;
+                margin-bottom: 10px;
+            }
+
+            .booking-card .delete-form {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+            }
+
+            .booking-card .delete-button {
+                background-color: #f8f9fa;
+                border: none;
+                color: #dc3545;
+                padding: 5px 10px;
+                font-size: 20px;
+                line-height: 1;
+                border-radius: 50%;
+            }
+
+        table {
+            border-collapse: separate;
+            border-spacing: 0 5px;
+        }
+
+        th {
+            padding: 10px;
+        }
+
+        td {
+            padding: 10px;
+        }
+     
+    </style>
+</head>
+<body>
+    <!-- ======= Header ======= -->
+    <main id="main">
+        <section id="team" class="team">
+            <div class="container aos-init" data-aos="fade-up">
+                <div class="section-header">
+                    <h2>Jobs</h2>
+                </div>
+                <div class="row gy-5">
+                    @inject IHttpContextAccessor HttpContextAccessor
+                    @model IEnumerable<Thesis_web.Data.Booking>
+                    @if (Model != null)
+                    {
+                        @foreach (var booking in Model)
+                        {
+                            @if (HttpContextAccessor.HttpContext.Session.GetString("email") != booking.User_email)
+                            { 
+                            <div class="col-lg-4 col-md-6 member aos-init booking-card">
+                                <div class="member-info">
+                                    <h4>Type: @booking.ServiceType</h4>
+                                    <h4>Location: @booking.Location</h4>
+                                    <span>Workers: @booking.Workers</span>
+                                    <p>Start Time: @booking.StartTime</p>
+                                    <p>Note: @booking.Note</p>
+                                    <p>Working Time: @booking.WorkingTime</p>
+                                    <p>Work Date: @booking.WorkDate</p>
+
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Role</th>
+                                                    <th>Number Needed</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Builder</td>
+                                                    <td>@booking.requiredBuilders</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Operator</td>
+                                                    <td>@booking.requiredOperators</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Designer</td>
+                                                    <td>@booking.requiredDesigners</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>P_Manager</td>
+                                                    <td>@booking.requiredPManagers</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+
+                                    @if (HttpContextAccessor.HttpContext.Session.GetString("user_role") == "admin")
+                                    {
+                                        <p>Total Price: @booking.TotalPrice</p>
+                                        <h4>Phone: @booking.Phone</h4>
+                                        <h4>Submitted by: @booking.User_email</h4>
+                                    }
+                                    @if (booking.Status == "Pending ⏳")
+                                    {
+                                        <div class="status-container">
+                                            <h4>Status: @booking.Status</h4>
+                                            <div class="spinner"></div>
+                                            @if (HttpContextAccessor.HttpContext.Session.GetString("user_role") == "admin")
+                                            {
+                                                <a href="@Url.Action("Approve", "Home", new { id = booking.Id })">Approve</a>
+                                            }
+                                            @if (booking.Workers.Contains(HttpContextAccessor.HttpContext.Session.GetString("user_role")))
+                                            {
+                                            <a href="@Url.Action("Accept", "Home", new { id = booking.Id })">Accept</a>
+                                            <!-- Add 'Accept Job' button -->
+                                            }
+                                        </div>
+                                    }
+                                   
+                                    else
+                                    {
+                                        <h4>Status: @booking.Status</h4>
+                                    }
+                                    @if (HttpContextAccessor.HttpContext.Session.GetString("user_role") == "admin")
+                                    {
+                                        <!-- Delete button form -->
+                                        <form asp-action="DeleteBooking" asp-controller="Home" asp-route-id="@booking.Id" method="post" class="delete-form">
+                                            <button type="submit" class="btn btn-danger delete-button">X</button>
+                                        </form>
+                                    }
+                                </div>
+                            </div>
+                            }
+                           
+                            }
+                        }
+                    
+                      else
+                    {
+                        <p>No bookings found.</p>
+                    }
+                </div>
+            </div>
+        </section>
+        <!-- ======= Our Team Section ======= -->
+    </main><!-- End #main -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Initialize AOS -->
+    <script>
+        AOS.init();
+    </script>
+</body>
+</html>

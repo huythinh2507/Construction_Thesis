@@ -1,0 +1,153 @@
+﻿@{
+    ViewBag.Title = "Pricing";
+    ViewBag.ShowBreadcrumbs = true;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- ======= Header ======= -->
+
+
+    <main id="main">
+
+        <section id="project-details" class="project-details" data-aos="fade-right" data-aos-delay="500">
+            <div class="container aos-init aos-animate">
+                <div class="row justify-content-between gy-4 mt-4">
+                    <div class="col-lg-8">
+                        <div class="portfolio-description">
+                            <h2>Pricing detail</h2>
+                            <p>
+                                The cost of construction services can vary greatly depending on many factors such as the size and complexity of the project, the materials used, the location, and more. Therefore, we believe it's best to provide a quote based on the specific details of your project.
+                            </p>
+                            <p>
+                            </p>
+                            <div class="testimonial-item">
+                                <p>
+                                    <i class="bi bi-quote quote-icon-left"></i>
+                                    To get a quote, please <a href="@Url.Action("ContactUs", "Home")" class="cta-button">contact us</a> and provide as much information as possible about your project. A professional contractor will then review your project and provide a detailed quote.
+                                    <i class="bi bi-quote quote-icon-right"></i>
+                                </p>
+                                <div>
+                                    <img src="/images/team-13.jpg" class="testimonial-img" alt="">
+                                    <h3>John Wilsson</h3>
+                                    <h4>Manager</h4>
+                                </div>
+                            </div>
+                            <style>
+                                .project-details {
+                                }
+
+                                .cta-button {
+                                    color: #007bff;
+                                    text-decoration: none;
+                                    transition: color 0.3s ease;
+                                }
+
+                                    .cta-button:hover {
+                                        color: #0056b3;
+                                    }
+
+                            </style>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!-- End Projet Details Section -->
+        <!-- ======= Services Section ======= -->
+        <section id="services" class="services section-bg" data-aos="fade-right">
+            <div class="container aos-init aos-animate">
+
+                <div class="section-header">
+                    <h2>Services</h2>
+                    <p>What we do</p>
+
+                </div>
+
+                <div class="row gy-4">
+
+                    <div class="col-lg-4 col-md-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+                        <div class="service-item  position-relative">
+                            <div class="icon">
+                                <i class="fa-solid fa-mountain-city"></i>
+                            </div>
+                            <h3>Product Management</h3>
+                            <p>This involves managing the different aspects of a product, from its development to its sale.</p>
+                            <a href="@Url.Action("Service_details", "Home")" class="readmore stretched-link">Learn more <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div><!-- End Service Item -->
+
+                    <div class="col-lg-4 col-md-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+                        <div class="service-item position-relative">
+                            <div class="icon">
+                                <i class="fa-solid fa-arrow-up-from-ground-water"></i>
+                            </div>
+                            <h3>Remodeling</h3>
+                            <p>This is the process of changing the structure or form of something, often a building.</p>
+
+                            <a href="@Url.Action("Service_details", "Home")" class="readmore stretched-link">Learn more <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div><!-- End Service Item -->
+
+                    <div class="col-lg-4 col-md-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+                        <div class="service-item position-relative">
+                            <div class="icon">
+                                <i class="fa-solid fa-compass-drafting"></i>
+                            </div>
+                            <h3>Design</h3>
+                            <p>This involves creating a plan or convention for the construction of an object or a system.</p>
+                            <a href="@Url.Action("Service_details", "Home")" class="readmore stretched-link">Learn more <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div><!-- End Service Item -->
+
+                    <div class="col-lg-4 col-md-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
+                        <div class="service-item position-relative">
+                            <div class="icon">
+                                <i class="fa-solid fa-trowel-bricks"></i>
+                            </div>
+                            <h3>Repair</h3>
+                            <p>This involves fixing or mending a thing suffering from damage or a fault.</p>
+                            <a href="@Url.Action("Service_details", "Home")" class="readmore stretched-link">Learn more <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div><!-- End Service Item -->
+
+                    <div class="col-lg-4 col-md-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="500">
+                        <div class="service-item position-relative">
+                            <div class="icon">
+                                <i class="fa-solid fa-helmet-safety"></i>
+                            </div>
+                            <h3>Construction</h3>
+                            <p>
+                                This is the process of building or assembling infrastructure.
+                            </p>
+                            <a href="@Url.Action("Service_details", "Home")" class="readmore stretched-link">Learn more <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div><!-- End Service Item -->
+
+
+
+                </div>
+
+            </div>
+        </section><!-- End Services Section -->
+
+        
+
+
+    </main><!-- End #main -->
+
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Initialize AOS -->
+    <script>
+        AOS.init();
+    </script>
+</body>
+
+</html>

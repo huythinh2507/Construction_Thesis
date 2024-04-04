@@ -1,0 +1,807 @@
+﻿@{
+    var successMessage = TempData["Success"] as string;
+    if (!string.IsNullOrEmpty(successMessage))
+    {
+    <script>
+                alert('@successMessage');
+                TempData.Keep("Success");
+        
+    </script>
+    }
+}
+@{
+    ViewBag.Title = "Home Page";
+    ViewBag.ShowBreadcrumbs = false;
+}
+<head>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+   
+    <style>
+
+
+
+        h2 span{
+            font-family: 'Times New Roman';
+        }
+
+
+
+
+
+
+        h1 {
+            text-align: center;
+            text-transform: uppercase;
+            color: whitesmoke;
+            font-size: 2.5rem;
+        }
+        .roller {
+            height: 4.125rem;
+            line-height: 4rem;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #1D3557;
+        }
+
+
+        #spare-time {
+            font-size: 1rem;
+            font-style: italic;
+            letter-spacing: 1rem;
+            margin-top: 0;
+            color: #A8DADC;
+        }
+
+        .roller #rolltext {
+            position: absolute;
+            top: 0;
+            animation: slide 5s infinite;
+        }
+
+        @@keyframes slide {
+            0% {
+                top: 0;
+            }
+
+            25% {
+                top: -4rem;
+            }
+
+            50% {
+                top: -8rem;
+            }
+
+            72.5% {
+                top: -12.25rem;
+            }
+        }
+
+        @@media screen and (max-width: 600px) {
+            
+
+            .roller {
+                height: 2.6rem;
+                line-height: 2.125rem;
+            }
+
+            #spare-time {
+                font-size: 1rem;
+                letter-spacing: 0.1rem;
+            }
+
+            .roller #rolltext {
+                animation: slide-mob 5s infinite;
+            }
+
+            @@keyframes slide-mob {
+                0% {
+                    top: 0;
+                }
+
+                25% {
+                    top: -2.125rem;
+                }
+
+                50% {
+                    top: -4.25rem;
+                }
+
+                72.5% {
+                    top: -6.375rem;
+                }
+            }
+        }
+
+       
+@@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&display=swap");
+
+
+        .loader {
+            background-color: #000;
+            position: fixed;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1.5s;
+           
+        }
+
+        .percentage {
+            font-size: 30px; /* Reduce the font size */
+            color: #fff;
+        }
+
+    </style>
+</head>
+<html>
+<body>
+   <!-- ======= Hero Section ======= -->
+    <section id="hero" class="hero">
+        <div class="info d-flex align-items-center">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 text-center">
+                        <div class="content">
+                        <h2>
+                            Welcome to 
+                            <span>
+                                    ConstructConnect
+                            </span>
+                        </h2>
+                           
+                        </div>
+
+
+                      
+                        <!-- Roller -->
+                        <div class="main">
+                            <h1>We provide</h1>
+                            <p class="aos-init aos-animate roller">
+                                <span id="rolltext">
+                                    Innovation<br />
+                                    Quality<br />
+                                    Professionalism<br />
+                                    Reliability<br />
+                                </span>
+                            </p>
+                        </div>
+                        <a data-aos="fade-up" data-aos-delay="200" href="@Url.Action("Services", "Home")" class="btn-get-started aos-init aos-animate">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <video autoplay loop muted playsinline>
+            <source src="/images/video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+    </section><!-- End Hero Section -->
+   
+    
+    <main id="main">
+        <!-- ======= Get Started Section ======= -->
+        <section id="get-started" class="get-started section-bg">
+            <div class="container">
+                <div class="row justify-content-between gy-4">
+                    <div class="col-lg-6 d-flex align-items-center aos-init aos-animate" data-aos="fade-up">
+                        <div class="content">
+                            <h3>Start Your Construction Journey with Us</h3>
+                            <p>
+                                Begin your project with confidence. Our platform provides a seamless experience, ensuring that all your construction needs are met with the highest standards. We are committed to delivering quality and reliability in every interaction.
+                            </p>
+                            <p>
+                                Our team is always ready to assist you. We understand the complexities of construction projects and are here to help you navigate them with ease. Start your construction journey with us and experience the difference.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-5" data-aos="fade">
+                        <form asp-action="SubmitContactForm" asp-controller="Contact" method="post" class="php-email-form">
+                            <h3 data-aos="fade-right" data-aos-delay="100">Begin Your Journey</h3>
+                            <p data-aos="fade-right" data-aos-delay="200">Embark on your construction journey with us, where we prioritize your needs and ensure a seamless experience. Our platform is designed to provide you with the best service, making your construction projects more efficient and hassle-free.</p>
+                            <div class="row gy-3">
+                                <div class="col-md-12" data-aos="fade-right" data-aos-delay="300">
+                                    <input type="text" id="name" class="form-control" name="name" placeholder="Your name" required>
+                                </div>
+                                <div class="col-md-12" data-aos="fade-right" data-aos-delay="400">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Your email" required>
+                                </div>
+                                <div class="col-md-12" data-aos="fade-right" data-aos-delay="500">
+                                    <textarea class="form-control" id="Message" rows="6" name="Message" placeholder="Your message" required></textarea>
+                                </div>
+                                <div class="col-md-12 text-center" data-aos="fade-right" data-aos-delay="6600">
+                                    <button id="sendLetter" type="submit">Send</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div><!-- End Quote Form -->
+
+                </div>
+            </div>
+        </section><!-- End Get Started Section -->
+        <!-- ======= Constructions Section ======= -->
+        <section id="constructions" class="constructions">
+            <div class="container aos-init aos-animate" data-aos="fade-up">
+                <div class="section-header">
+                    <h2>Constructions</h2>
+                    <p>Discover the wide range of construction projects we’ve undertaken. Each one showcases our commitment to excellence, innovation, and customer satisfaction.</p>
+                </div>
+                <div class="row gy-4">
+                    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="500">
+                        <div class="card-item">
+                            <div class="row">
+                                <div class="col-xl-5" data-aos="fade-right" data-aos-duration="1000">
+                                    <div class="card-bg" style="background-image: url('/images/constructions-1.jpg');"></div>
+                                </div>
+                                <div class="col-xl-7 d-flex align-items-center">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Technological Tool</h4>
+                                        <p>Helping share information among the construction team.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- End Card Item -->
+
+                    <div class="col-lg-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card-item">
+                            <div class="row">
+                                <div class="col-xl-5">
+                                    <div class="card-bg" style="background-image: url('/images/constructions-2.jpg');"></div>
+                                </div>
+                                <div class="col-xl-7 d-flex align-items-center">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Efficiency and Safety</h4>
+                                        <p>Guiding a safe and efficient way for workers.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- End Card Item -->
+                    <div class="col-lg-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card-item">
+                            <div class="row">
+                                <div class="col-xl-5">
+                                    <div class="card-bg" style="background-image: url('/images/constructions-3.jpg');"></div>
+                                </div>
+                                <div class="col-xl-7 d-flex align-items-center">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Business Management</h4>
+                                        <p>Designed to help contractors manage various aspects of their business.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- End Card Item -->
+                    <div class="col-lg-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
+                        <div class="card-item">
+                            <div class="row">
+                                <div class="col-xl-5">
+                                    <div class="card-bg" style="background-image: url('/images/constructions-4.jpg');"></div>
+                                </div>
+                                <div class="col-xl-7 d-flex align-items-center">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Physical Structure</h4>
+                                        <p>In construction, a platform is a temporary structure used to support workers and materials.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- End Card Item -->
+                </div>
+            </div>
+        </section><!-- End Constructions Section -->
+        <!-- ======= Services Section ======= -->
+        <section id="services" class="services section-bg">
+            <div class="container aos-init aos-animate" data-aos="fade-up">
+
+                <div class="section-header">
+                    <h2>Services</h2>
+                    <p>What we do</p>
+
+                </div>
+
+                <div class="row gy-4">
+
+                 
+
+                    <div class="col-lg-4 col-md-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+                        <div class="service-item position-relative">
+                            <div class="icon">
+                                <i class="fa-solid fa-arrow-up-from-ground-water"></i>
+                            </div>
+                            <h3>Remodeling</h3>
+                            <p>This is the process of changing the structure or form of something, often a building.</p>
+                           
+                            <a href="@Url.Action("Service_details", "Home")" class="readmore stretched-link">Learn more <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div><!-- End Service Item -->
+
+                    <div class="col-lg-4 col-md-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+                        <div class="service-item position-relative">
+                            <div class="icon">
+                                <i class="fa-solid fa-compass-drafting"></i>
+                            </div>
+                            <h3>Design</h3>
+                            <p>This involves creating a plan or convention for the construction of an object or a system.</p>
+                            <a href="@Url.Action("Service_details", "Home")" class="readmore stretched-link">Learn more <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div><!-- End Service Item -->
+
+                    <div class="col-lg-4 col-md-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
+                        <div class="service-item position-relative">
+                            <div class="icon">
+                                <i class="fa-solid fa-trowel-bricks"></i>
+                            </div>
+                            <h3>Repair</h3>
+                            <p>This involves fixing or mending a thing suffering from damage or a fault.</p>
+                            <a href="@Url.Action("Service_details", "Home")" class="readmore stretched-link">Learn more <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div><!-- End Service Item -->
+
+                    <div class="col-lg-4 col-md-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="500">
+                        <div class="service-item position-relative">
+                            <div class="icon">
+                                <i class="fa-solid fa-helmet-safety"></i>
+                            </div>
+                            <h3>Construction</h3>
+                            <p>
+                                This is the process of building or assembling infrastructure.
+                            </p>
+                            <a href="@Url.Action("Service_details", "Home")" class="readmore stretched-link">Learn more <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div><!-- End Service Item -->
+
+                   
+
+                </div>
+
+            </div>
+        </section><!-- End Services Section -->
+        <!-- ======= Alt Services Section ======= -->
+        <section id="alt-services" class="alt-services">
+            <div class="container aos-init aos-animate" data-aos="fade-up">
+
+                <div class="row justify-content-around gy-4">
+                    <div class="col-lg-6 img-bg aos-init aos-animate" style="background-image: url('/images/alt-services.jpg');" data-aos="zoom-in" data-aos-delay="100"></div>
+
+                    <div class="col-lg-5 d-flex flex-column justify-content-center">
+                        <h3>Building the Future</h3>
+                        <p>Our team of dedicated construction workers, clad in blue uniforms and yellow hard hats, are diligently working on our latest project. With their tools in hand, they are ready to tackle any challenge that comes their way</p>
+
+                        <div class="icon-box d-flex position-relative aos-init" data-aos="fade-up" data-aos-delay="100">
+                            <i class="bi bi-easel flex-shrink-0"></i>
+                            <div>
+                                <h4><a href="" class="stretched-link">Innovative Design</a></h4>
+                                <p>Our team utilizes the latest technology to bring our designs to life. With a laptop at their disposal, they can access real-time data and make necessary adjustments on the spot.</p>
+                            </div>
+                        </div><!-- End Icon Box -->
+
+                        <div class="icon-box d-flex position-relative aos-init" data-aos="fade-up" data-aos-delay="200">
+                            <i class="bi bi-patch-check flex-shrink-0"></i>
+                            <div>
+                                <h4><a href="" class="stretched-link">Quality Assurance</a></h4>
+                                <p>We take pride in our attention to detail. Our team members, like Raj and Midas, ensure that every aspect of the construction process is meticulously checked and double-checked.</p>
+                            </div>
+                        </div><!-- End Icon Box -->
+
+                        <div class="icon-box d-flex position-relative aos-init" data-aos="fade-up" data-aos-delay="300">
+                            <i class="bi bi-alarm flex-shrink-0"></i>
+                            <div>
+                                <h4><a href="" class="stretched-link">Efficient Execution</a></h4>
+                                <p>Our team is committed to delivering projects on time without compromising on quality. They work tirelessly against the backdrop of the clear blue sky, symbolizing our limitless potential and commitment to excellence.</p>
+                            </div>
+                        </div><!-- End Icon Box -->
+
+                        <div class="icon-box d-flex position-relative aos-init" data-aos="fade-up" data-aos-delay="400">
+                            <i class="bi bi-tree flex-shrink-0"></i>
+                            <div>
+                                <h4><a href="" class="stretched-link">Sustainable Construction</a></h4>
+                                <p>We believe in creating structures that are not only aesthetically pleasing but also environmentally friendly. Our team is trained to implement sustainable practices in all our projects, contributing to a greener future.</p>
+                            </div>
+                        </div><!-- End Icon Box -->
+
+                    </div>
+                </div>
+
+            </div>
+        </section><!-- End Alt Services Section -->
+        <!-- ======= Features Section ======= -->
+        <section id="features" class="features section-bg">
+            <div class="container aos-init" data-aos="fade-up">
+
+                <ul class="nav nav-tabs row  g-2 d-flex" role="tablist">
+
+                    <li class="nav-item col-3" role="presentation">
+                        <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#tab-1" aria-selected="true" role="tab">
+                            <h4>Craftsmanship</h4>
+                        </a>
+                    </li><!-- End tab nav item -->
+
+                    <li class="nav-item col-3" role="presentation">
+                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-2" aria-selected="false" tabindex="-1" role="tab">
+                            <h4>Precision</h4>
+                        </a><!-- End tab nav item -->
+
+                    </li>
+                    <li class="nav-item col-3" role="presentation">
+                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-3" aria-selected="false" tabindex="-1" role="tab">
+                            <h4>Quality Control</h4>
+                        </a>
+                    </li><!-- End tab nav item -->
+
+                    <li class="nav-item col-3" role="presentation">
+                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-4" aria-selected="false" tabindex="-1" role="tab">
+                            <h4>Teamwork</h4>
+                        </a>
+                    </li><!-- End tab nav item -->
+
+                </ul>
+
+                <div class="tab-content">
+
+                    <div class="tab-pane active show" id="tab-1" role="tabpanel">
+                        <div class="row">
+                            <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0 d-flex flex-column justify-content-center aos-init" data-aos="fade-up" data-aos-delay="100">
+                                <h3>Craftsmanship at Work</h3>
+                                <p class="fst-italic">
+                                    In the heart of our construction workers rental platform, craftsmanship takes center stage. Our platform connects you with skilled construction workers who are experts in their field.
+                                </p>
+                                <ul>
+                                    <li><i class="bi bi-check2-all"></i> Precision and Quality: Each construction worker on our platform is vetted for their precision and quality of work. They bring years of experience and a commitment to excellence in every project they undertake.</li>
+                                    <li><i class="bi bi-check2-all"></i> Handyman Services: From sawing wood to building structures, our construction workers are equipped to handle a wide range of tasks. They are the embodiment of handyman services, ready to bring your construction vision to life.</li>
+                                    <li><i class="bi bi-check2-all"></i> Sustainable Practices: We believe in sustainable practices in all aspects of construction. Our platform promotes the use of environmentally friendly materials and methods, contributing to a greener future.</li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-6 order-1 order-lg-2 text-center aos-init" data-aos="fade-up" data-aos-delay="200">
+                                <img src="/images/features-1.jpg" alt="" class="img-fluid">
+                            </div>
+                        </div>
+                    </div><!-- End tab content item -->
+
+                    <div class="tab-pane" id="tab-2" role="tabpanel">
+                        <div class="row">
+                            <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0 d-flex flex-column justify-content-center">
+                                <h3>Precision Planning</h3>
+                                <p class="fst-italic">
+                                    Our platform connects you with skilled surveyors who are experts in their field. Equipped with a transit and a set of plans, they ensure that every construction project starts on a solid foundation.
+                                </p>
+                                <ul>
+                                    <li><i class="bi bi-check2-all"></i> Safety First: Safety is our top priority. Our construction workers, like the surveyor in the image, are always equipped with safety gear, including bright orange vests and hard hats.</li>
+                                    <li><i class="bi bi-check2-all"></i> Equipment: Our platform ensures that all construction workers have access to the latest equipment.</li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-6 order-1 order-lg-2 text-center">
+                                <img src="/images/features-2.jpg" alt="" class="img-fluid">
+                            </div>
+                        </div>
+                    </div><!-- End tab content item -->
+
+                    <div class="tab-pane" id="tab-3" role="tabpanel">
+                        <div class="row">
+                            <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0 d-flex flex-column justify-content-center">
+                                <h3>Hands-On Construction</h3>
+                                <ul>
+                                    <li><i class="bi bi-check2-all"></i> Quality Tools: Our construction workers are equipped with quality tools to ensure the job is done right. The image shows a worker with a sturdy, reliable hammer, indicative of the high-quality tools our workers use.</li>
+                                    <li><i class="bi bi-check2-all"></i> Attention to Detail: Every strike of the hammer is made with precision. Our construction workers pay great attention to detail, ensuring the highest quality of workmanship in every project.</li>
+                                    <li><i class="bi bi-check2-all"></i> Building with Care: Our platform is not just about construction, it’s about building with care. Our workers treat every project as their own, putting in the time and effort to ensure it meets your expectations.</li>
+                                </ul>
+                                <p class="fst-italic">
+                                    Our platform connects you with skilled construction workers who are ready to get their hands dirty. Whether it’s hammering a wooden plank or laying a brick, they have the skills to get the job done.
+                                </p>
+                            </div>
+                            <div class="col-lg-6 order-1 order-lg-2 text-center">
+                                <img src="/images/features-3.jpg" alt="" class="img-fluid">
+                            </div>
+                        </div>
+                    </div><!-- End tab content item -->
+
+                    <div class="tab-pane" id="tab-4" role="tabpanel">
+                        <div class="row">
+                            <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0 d-flex flex-column justify-content-center">
+                                <h3>Teamwork in Action</h3>
+                                <p class="fst-italic">
+                                    Our platform is all about teamwork. The image shows a group of construction workers, equipped with safety gear, heading towards their next task. Their collective effort ensures the smooth execution of every project.
+                                </p>
+                                <ul>
+                                    <li><i class="bi bi-check2-all"></i> Industrial Expertise: Our platform connects you with workers who are experienced in handling industrial equipment. The image showcases a typical day at an industrial site, with large tanks and pipes in the background.</li>
+                                    <li><i class="bi bi-check2-all"></i> Safety and Compliance: Safety is our top priority.</li>
+                                    <li><i class="bi bi-check2-all"></i> Building the Future: Our workers are building the future. Our platform is committed to connecting you with the best construction workers to bring your vision to life.</li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-6 order-1 order-lg-2 text-center">
+                                <img src="/images/features-4.jpg" alt="" class="img-fluid">
+                            </div>
+                        </div>
+                    </div><!-- End tab content item -->
+
+                </div>
+
+            </div>
+        </section><!-- End Features Section -->
+        <!-- ======= Our Projects Section ======= -->
+        <section id="projects" class="projects">
+            <div class="container aos-init" data-aos="fade-up">
+                <div class="section-header">
+                    <h2>Our Projects</h2>
+                    <p>We take pride in our diverse portfolio of projects. Each one stands as a testament to our commitment to excellence, our innovative approach, and our ability to deliver unique solutions that meet our clients’ needs.</p>
+                </div>
+                <div class="portfolio-isotope" data-portfolio-filter="*" data-portfolio-layout="masonry" data-portfolio-sort="original-order">
+                    <ul class="portfolio-flters aos-init" data-aos="fade-up" data-aos-delay="100">
+                        <li data-filter="*" class="filter-active">All</li>
+                        <li data-filter=".filter-remodeling">Remodeling</li>
+                        <li data-filter=".filter-construction">Construction</li>
+                        <li data-filter=".filter-repairs">Repairs</li>
+                        <li data-filter=".filter-design">Design</li>
+                    </ul><!-- End Projects Filters -->
+
+                    <div class="row gy-4 portfolio-container aos-init" data-aos="fade-up" data-aos-delay="200" style="position: relative; height: 984px;">
+
+                        <div class="col-lg-4 col-md-6 portfolio-item filter-remodeling" style="position: absolute; left: 0px; top: 0px;">
+                            <div class="portfolio-content h-100">
+                                <img src="/images/remodeling-1.jpg" class="img-fluid" alt="">
+                                <div class="portfolio-info">
+                                    <h4>Remodeling 1</h4>
+                                    <a href="/images/remodeling-1.jpg" title="Remodeling 1" data-gallery="portfolio-gallery-remodeling" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                                    <a asp-area="" class="details-link bi bi-link-45deg" asp-controller="Home" asp-action="Project"></a>
+                                </div>
+                            </div>
+                        </div><!-- End Projects Item -->
+
+                        <div class="col-lg-4 col-md-6 portfolio-item filter-construction" style="position: absolute; left: 320px; top: 0px;">
+                            <div class="portfolio-content h-100">
+                                <img src="/images/construction-1.jpg" class="img-fluid" alt="">
+                                <div class="portfolio-info">
+                                    <h4>Construction 1</h4>
+                                    <a href="/images/construction-1.jpg" title="Construction 1" data-gallery="portfolio-gallery-construction" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                                    <a asp-area="" class="details-link bi bi-link-45deg" asp-controller="Home" asp-action="Project"></a>
+                                </div>
+                            </div>
+                        </div><!-- End Projects Item -->
+
+                        <div class="col-lg-4 col-md-6 portfolio-item filter-repairs" style="position: absolute; left: 640px; top: 0px;">
+                            <div class="portfolio-content h-100">
+                                <img src="/images/repairs-1.jpg" class="img-fluid" alt="">
+                                <div class="portfolio-info">
+                                    <h4>Repairs 1</h4>
+                                    <a href="/images/repairs-1.jpg" title="Repairs 1" data-gallery="portfolio-gallery-repairs" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                                    <a asp-area="" class="details-link bi bi-link-45deg" asp-controller="Home" asp-action="Project"></a>
+                                </div>
+                            </div>
+                        </div><!-- End Projects Item -->
+
+                        <div class="col-lg-4 col-md-6 portfolio-item filter-design" style="position: absolute; left: 0px; top: 246px;">
+                            <div class="portfolio-content h-100">
+                                <img src="/images/design-1.jpg" class="img-fluid" alt="">
+                                <div class="portfolio-info">
+                                    <h4>Design 1</h4>
+                                    <a href="/images/design-1.jpg" title="Repairs 1" data-gallery="portfolio-gallery-book" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                                    <a asp-area="" class="details-link bi bi-link-45deg" asp-controller="Home" asp-action="Project"></a>
+                                </div>
+                            </div>
+                        </div><!-- End Projects Item -->
+
+                        <div class="col-lg-4 col-md-6 portfolio-item filter-remodeling" style="position: absolute; left: 320px; top: 246px;">
+                            <div class="portfolio-content h-100">
+                                <img src="/images/remodeling-2.jpg" class="img-fluid" alt="">
+                                <div class="portfolio-info">
+                                    <h4>Remodeling 2</h4>
+                                    <a href="/images/remodeling-2.jpg" title="Remodeling 2" data-gallery="portfolio-gallery-remodeling" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                                    <a asp-area="" class="details-link bi bi-link-45deg" asp-controller="Home" asp-action="Project"></a>
+                                </div>
+                            </div>
+                        </div><!-- End Projects Item -->
+
+                        <div class="col-lg-4 col-md-6 portfolio-item filter-construction" style="position: absolute; left: 640px; top: 246px;">
+                            <div class="portfolio-content h-100">
+                                <img src="/images/construction-2.jpg" class="img-fluid" alt="">
+                                <div class="portfolio-info">
+                                    <h4>Construction 2</h4>
+                                    <a href="/images/construction-2.jpg" title="Construction 2" data-gallery="portfolio-gallery-construction" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                                    <a asp-area="" class="details-link bi bi-link-45deg" asp-controller="Home" asp-action="Project"></a>
+                                </div>
+                            </div>
+                        </div><!-- End Projects Item -->
+
+                        <div class="col-lg-4 col-md-6 portfolio-item filter-repairs" style="position: absolute; left: 0px; top: 492px;">
+                            <div class="portfolio-content h-100">
+                                <img src="/images/repairs-2.jpg" class="img-fluid" alt="">
+                                <div class="portfolio-info">
+                                    <h4>Repairs 2</h4>
+                                    <a href="/images/repairs-2.jpg" title="Repairs 2" data-gallery="portfolio-gallery-repairs" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                                    <a asp-area="" class="details-link bi bi-link-45deg" asp-controller="Home" asp-action="Project"></a>
+                                </div>
+                            </div>
+                        </div><!-- End Projects Item -->
+
+                        <div class="col-lg-4 col-md-6 portfolio-item filter-design" style="position: absolute; left: 320px; top: 492px;">
+                            <div class="portfolio-content h-100">
+                                <img src="/images/design-2.jpg" class="img-fluid" alt="">
+                                <div class="portfolio-info">
+                                    <h4>Design 2</h4>
+                                    <a href="/images/design-2.jpg" title="Repairs 2" data-gallery="portfolio-gallery-book" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                                    <a asp-area="" class="details-link bi bi-link-45deg" asp-controller="Home" asp-action="Project"></a>
+                                </div>
+                            </div>
+                        </div><!-- End Projects Item -->
+
+                        <div class="col-lg-4 col-md-6 portfolio-item filter-remodeling" style="position: absolute; left: 640px; top: 492px;">
+                            <div class="portfolio-content h-100">
+                                <img src="/images/remodeling-3.jpg" class="img-fluid" alt="">
+                                <div class="portfolio-info">
+                                    <h4>Remodeling 3</h4>
+                                    <a href="/images/remodeling-3.jpg" title="Remodeling 3" data-gallery="portfolio-gallery-remodeling" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                                    <a asp-area="" class="details-link bi bi-link-45deg" asp-controller="Home" asp-action="Project"></a>
+                                </div>
+                            </div>
+                        </div><!-- End Projects Item -->
+
+                        <div class="col-lg-4 col-md-6 portfolio-item filter-construction" style="position: absolute; left: 0px; top: 738px;">
+                            <div class="portfolio-content h-100">
+                                <img src="/images/construction-3.jpg" class="img-fluid" alt="">
+                                <div class="portfolio-info">
+                                    <h4>Construction 3</h4>
+                                    <a href="/images/construction-3.jpg" title="Construction 3" data-gallery="portfolio-gallery-construction" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                                    <a asp-area="" class="details-link bi bi-link-45deg" asp-controller="Home" asp-action="Project"></a>
+                                </div>
+                            </div>
+                        </div><!-- End Projects Item -->
+
+                        <div class="col-lg-4 col-md-6 portfolio-item filter-repairs" style="position: absolute; left: 320px; top: 738px;">
+                            <div class="portfolio-content h-100">
+                                <img src="/images//repairs-3.jpg" class="img-fluid" alt="">
+                                <div class="portfolio-info">
+                                    <h4>Repairs 3</h4>
+                                    <a href="/images/repairs-3.jpg" title="Repairs 2" data-gallery="portfolio-gallery-repairs" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                                    <a asp-area="" class="details-link bi bi-link-45deg" asp-controller="Home" asp-action="Project"></a>
+                                </div>
+                            </div>
+                        </div><!-- End Projects Item -->
+
+                        <div class="col-lg-4 col-md-6 portfolio-item filter-design" style="position: absolute; left: 640px; top: 738px;">
+                            <div class="portfolio-content h-100">
+                                <img src="/images/design-3.jpg" class="img-fluid" alt="">
+                                <div class="portfolio-info">
+                                    <h4>Design 3</h4>
+                                    <a href="/images/design-3.jpg" title="Repairs 3" data-gallery="portfolio-gallery-book" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                                    <a asp-area="" class="details-link bi bi-link-45deg" asp-controller="Home" asp-action="Project"></a>
+                                </div>
+                            </div>
+                        </div><!-- End Projects Item -->
+
+                    </div><!-- End Projects Container -->
+
+                </div>
+
+            </div>
+        </section><!-- End Our Projects Section -->
+        <!-- ======= Testimonials Section ======= -->
+        <section id="testimonials" class="testimonials section-bg">
+            <div class="container aos-init" data-aos="fade-up" data-aos-delay="500">
+
+                <div class="section-header">
+                    <h2>Client Testimonials</h2>
+                    <p>Here's what our clients have to say about us. Their feedback and satisfaction are a testament to our commitment to providing the best service in the construction rental industry.</p>
+                </div>
+
+                <div class="slides-2 swiper swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden">
+                    <div class="swiper-wrapper" id="swiper-wrapper-bc3dc9267cbe0c12" aria-live="off" style="transform: translate3d(-956px, 0px, 0px); transition-duration: 0ms;">
+                        <div class="swiper-slide swiper-slide-duplicate swiper-slide-prev" role="group" aria-label="5 / 5" style="width: 936px; margin-right: 20px;" data-swiper-slide-index="4">
+                            <div class="testimonial-wrap">
+                                <div class="testimonial-item">
+                                    <img src="/images/testimonials-1.jpg" class="testimonial-img" alt="">
+                                    <h3>John Larson</h3>
+                                    <h4>Entrepreneur</h4>
+                                    <div class="stars">
+                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                    </div>
+                                    <p>
+                                        <i class="bi bi-quote quote-icon-left"></i>
+                                        I’ve been using this platform for all my construction rental needs for the past year, and I couldn’t be happier. The equipment is top-notch, and the customer service is excellent. They really go above and beyond to make sure you have what you need.
+                                        <i class="bi bi-quote quote-icon-right"></i>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 5" style="width: 936px; margin-right: 20px;" data-swiper-slide-index="0">
+                            <div class="testimonial-wrap">
+                                <div class="testimonial-item">
+                                    <img src="/images/testimonials-1.jpg" class="testimonial-img" alt="">
+                                    <h3>Saul Goodman</h3>
+                                    <h4>Ceo &amp; Founder</h4>
+                                    <div class="stars">
+                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                    </div>
+                                    <p>
+                                        <i class="bi bi-quote quote-icon-left"></i>
+                                        As a small construction business owner, this platform has been a game-changer for me. It’s so easy to find and rent the equipment I need. Plus, the prices are very competitive. Highly recommended!
+                                        <i class="bi bi-quote quote-icon-right"></i>
+                                    </p>
+                                </div>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                        <div class="swiper-slide swiper-slide-next" role="group" aria-label="2 / 5" style="width: 936px; margin-right: 20px;" data-swiper-slide-index="1">
+                            <div class="testimonial-wrap">
+                                <div class="testimonial-item">
+                                    <img src="/images/testimonials-2.jpg" class="testimonial-img" alt="">
+                                    <h3>Sara Wilsson</h3>
+                                    <h4>Designer</h4>
+                                    <div class="stars">
+                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                    </div>
+                                    <p>
+                                        <i class="bi bi-quote quote-icon-left"></i>
+                                        What sets this platform apart is their commitment to customer satisfaction. I had an issue with a piece of equipment I rented, and their team resolved it quickly and professionally. I’m definitely a loyal customer now.
+                                        <i class="bi bi-quote quote-icon-right"></i>
+                                    </p>
+                                </div>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                        <div class="swiper-slide" role="group" aria-label="3 / 5" style="width: 936px; margin-right: 20px;" data-swiper-slide-index="2">
+                            <div class="testimonial-wrap">
+                                <div class="testimonial-item">
+                                    <img src="/images/testimonials-4.jpg" class="testimonial-img" alt="">
+                                    <h3>Jena Karlis</h3>
+                                    <h4>Store Owner</h4>
+                                    <div class="stars">
+                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                    </div>
+                                    <p>
+                                        <i class="bi bi-quote quote-icon-left"></i>
+                                        I’ve tried other construction rental platforms before, but none of them compare to this one. The range of equipment available is impressive, and everything is always in excellent condition. Keep up the good work!
+                                        <i class="bi bi-quote quote-icon-right"></i>
+                                    </p>
+                                </div>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                        <div class="swiper-slide" role="group" aria-label="4 / 5" style="width: 936px; margin-right: 20px;" data-swiper-slide-index="3">
+                            <div class="testimonial-wrap">
+                                <div class="testimonial-item">
+                                    <img src="/images/testimonials-5.jpg" class="testimonial-img" alt="">
+                                    <h3>Matt Brandon</h3>
+                                    <h4>Freelancer</h4>
+                                    <div class="stars">
+                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                    </div>
+                                    <p>
+                                        <i class="bi bi-quote quote-icon-left"></i>
+                                        This platform has made my job so much easier. I can find and book the equipment I need in minutes, and I know I can rely on their quality and service. It’s a huge time-saver.
+                                        <i class="bi bi-quote quote-icon-right"></i>
+                                    </p>
+                                </div>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                      
+
+                     
+                    </div>
+                    <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1" aria-current="true"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 4"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 5"></span></div>
+                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                </div>
+
+            </div>
+        </section><!-- End Testimonials Section -->
+
+    
+    </main><!-- End #main -->
+    <!-- ======= Loading Bar ======= -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Initialize AOS -->
+    <script>
+        AOS.init();
+    </script>
+</body>
+</html>

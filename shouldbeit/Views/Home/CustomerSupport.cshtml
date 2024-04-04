@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Customer Support";
+    ViewBag.ShowBreadcrumbs = true;
+}
+
+<div class="content">
+    <section id="customer-support">
+        <div class="support-section">
+            <div class="inner-container">
+                <h1>@ViewData["Title"]</h1>
+                <p class="text">
+                    Our customer support team is here to help you 24/7. Whether you have a question about our services, need assistance with a project, or just want to give us feedback, we're always ready to listen.
+                </p>
+                <div class="contact-info">
+                    <h2>Contact Us</h2>
+                    <p>Email: huythinh2507@gmail.com</p>
+                    <p>Phone: 085-365-9939</p>
+                </div>
+                <div class="faq-link">
+                    <p>For common questions, you might find the answer in our <a href="/Home/FAQ">FAQ</a>.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+    .content {
+        font-family: Arial, sans-serif;
+        color: #333;
+    }
+
+    .support-section {
+        margin: 20px 0;
+    }
+
+    .inner-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .contact-info, .faq-link {
+        margin-top: 20px;
+    }
+</style>

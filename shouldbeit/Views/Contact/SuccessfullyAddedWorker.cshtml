@@ -1,0 +1,10 @@
+﻿@{
+    var successMessage = TempData["Success"] as string;
+    if (!string.IsNullOrEmpty(successMessage))
+    {
+        <script>
+            alert('@successMessage');
+            TempData.Keep("Success");
+        </script>
+    }
+}

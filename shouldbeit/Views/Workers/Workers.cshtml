@@ -1,0 +1,295 @@
+﻿@{
+    ViewBag.Title = "Workers";
+    ViewBag.ShowBreadcrumbs = true;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <style>
+        .portfolio-flters {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+            margin-block-end: 30px;
+        }
+
+        .filter-button {
+            display: inline-block;
+            margin: 0 15px;
+            padding: 10px 20px;
+            background: #fff;
+            border: 2px solid #feb900; /* changed from #ffff00 to #feb900 */
+            border-radius: 50px;
+            color: black;
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+            .filter-button:hover, .filter-button.filter-active {
+                background: #feb900; /* changed from #ffff00 to #feb900 */
+                color: #fff;
+            }
+
+        .modal-content {
+            background-color: #f5f5f5;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+        }
+
+        .modal-header {
+            padding: 15px;
+            color: white;
+            background-color: #007bff;
+            border-bottom: 1px solid #888;
+        }
+
+        .modal-body {
+            padding: 15px;
+            line-height: 1.6;
+        }
+
+        .modal-footer {
+            padding: 15px;
+            color: white;
+            background-color: #007bff;
+            border-top: 1px solid #888;
+        }
+
+        .modal-title {
+            color: white;
+        }
+
+        .close {
+            color: #FEB900;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+        .btn-secondary {
+            color: #fff;
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+            .btn-secondary:hover {
+                color: #fff;
+                background-color: #5a6268;
+                border-color: #545b62;
+            }
+
+        #name {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 2px solid #007bff;
+            border-radius: 4px;
+        }
+
+        more_de {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 24px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            more_de:hover {
+                background-color: #0069d9;
+            }
+
+      .margin
+      {
+          margin-top: 50px;
+      }
+
+      null
+      {
+            margin-top: 5px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- ======= Header ======= -->
+
+
+    <main id="main">
+
+        <section id="team" class="team">
+            <div class="container aos-init" data-aos="fade-up">
+                <div class="section-header">
+                    <h2>Search Workers</h2>
+                </div>
+
+                <div>
+                    <input type="text" id="name" onclick="searchByName()" placeholder="Search by name">
+                </div>
+
+
+                <div class="section-header margin">
+                    <h2>Meet Our Team</h2> <p>We are a group of dedicated professionals committed to providing the best service in the construction rental industry. Our team brings together a wealth of experience and expertise, ensuring that we deliver top-notch solutions for all your construction needs.</p>
+                </div>
+
+                <div class="portfolio-flters">
+                    <button class="filter-button filter-active" data-filter="all">All</button>
+                    <button class="filter-button" data-filter="builder">Builder</button>
+                    <button class="filter-button" data-filter="manager">Manager</button>
+                    <button class="filter-button" data-filter="accountant">Accountant</button>
+                    <button class="filter-button" data-filter="operator">Operator</button>
+                </div>
+
+             
+                <div class="row gy-5">
+                    @model IEnumerable<Thesis_web.Data.Workers>
+                    @if (Model != null)
+                    {
+                        int idCounter = 1; 
+                        foreach (var worker in Model)
+                        {
+                            <div class="col-lg-4 col-md-6 member aos-init member  @worker.Position.ToLower()" id="@worker.Name">
+                                <div class="member-img">
+                                    <img src="@worker.ImageLink" class="img-fluid" alt="">
+                                    <div class="social">
+                                        <a href="#"><i class="bi bi-twitter"></i></a>
+                                        <a href="#"><i class="bi bi-facebook"></i></a>
+                                        <a href="#"><i class="bi bi-instagram"></i></a>
+                                        <a href="#"><i class="bi bi-linkedin"></i></a>
+                                    </div>
+                                </div>
+                                <div class="member-info text-center">
+                                    <h4>@worker.Name</h4>
+                                    <span class="@worker.Position.ToLower()">@worker.Position</span>
+
+                                    <button type="button" class="btn btn-primary more_de" data-toggle="modal" data-target="#@idCounter">
+                                        More Details
+                                    </button>
+
+                                    <!-- Add a margin to create space -->
+                                    <span style="margin-right: 20px;"></span>
+
+                                    @inject IHttpContextAccessor HttpContextAccessor
+                                    @if (HttpContextAccessor.HttpContext.Session.GetString("user_role") == "admin")
+                                    {
+                                        <span>
+                                            <form asp-action="DeleteWorker" asp-controller="Workers" asp-route-id="@worker.Id" method="post" class="delete-form">
+                                                <button type="submit" class="">Delete</button>
+                                            </form>
+                                        </span>
+                                    }
+
+
+
+                                </div>
+                            </div>
+                            <div class="modal fade" id="@idCounter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h2 class="modal-title">@worker.Name</h2>
+                                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+
+                                        </div>
+                                        <div class="modal-body">
+                                            <h4>Description</h4>
+                                            <p>@worker.Description</p>
+                                            <h4>Location</h4>
+                                            <p>@worker.Location</p>
+                                            <h4>Phone</h4>
+                                            <p>@worker.Phone</p>
+                                            <h4>Skills</h4>
+                                            <p>@worker.Skills</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            idCounter++;
+                        }
+                    }
+                    else
+                    {
+                        <p>No workers found.</p>
+                    }
+                </div>
+                <script>
+                    $(document).ready(function () {
+                        $("[data-toggle='modal']").click(function () {
+                            var target = $(this).attr('data-target');
+                            $(target).modal('show');
+                        });
+                    });
+                    function searchByName() {
+                        var name = document.getElementById('name').value.toLowerCase(); // Convert input to lowercase
+                        var allDivs = document.getElementsByTagName('div');
+                        for (var i = 0; i < allDivs.length; i++) {
+                            var userDiv = allDivs[i];
+                            if (userDiv.id.toLowerCase().includes(name) && userDiv.id !== 'header') { // Check if ID contains the input
+                                userDiv.scrollIntoView();
+
+                              
+                                return; // Exit the function once a match is found
+                            }
+                        }
+                        alert('No worker found with that name');
+                    }
+                    document.getElementById('name').addEventListener('keyup', function (event) {
+                        if (event.key === 'Enter') { // 'Enter' key was pressed
+                            searchByName(); // Call the search function
+                        }
+                    });
+
+
+                </script>
+            </div>
+        </section>
+        <!-- ======= Our Team Section ======= -->
+    </main><!-- End #main -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Initialize AOS -->
+    <script>
+        AOS.init();
+    </script>
+    <script>
+       
+        document.querySelectorAll('.filter-button').forEach(function (button) {
+            button.addEventListener('click', function () {
+                var filter = this.dataset.filter;
+                console.log('Filter:', filter); // Log the filter
+                document.querySelectorAll('.member').forEach(function (member) {
+                    console.log('Member classes:', member.classList); // Log the member's classes
+                    if (filter === 'all' || member.classList.contains(filter)) {
+                        member.style.display = 'block';
+                    } else {
+                        member.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+    </script>
+    
+</body>
+</html>

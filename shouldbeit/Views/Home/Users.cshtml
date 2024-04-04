@@ -1,0 +1,153 @@
+﻿@{
+    ViewBag.Title = "Users";
+    ViewBag.ShowBreadcrumbs = true;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        .booking-card {
+            background-color: #f8f9fa;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.2s ease-in-out;
+            margin: 20px;
+        }
+
+            .booking-card:hover {
+                transform: scale(1.02);
+            }
+
+            .booking-card .member-info h4 {
+                color: #007bff;
+                margin-bottom: 10px;
+            }
+
+            .booking-card .member-info span {
+                display: block;
+                color: #6c757d;
+                margin-bottom: 10px;
+            }
+
+            .booking-card .member-info p {
+                color: #343a40;
+                margin-bottom: 10px;
+            }
+
+            .booking-card .delete-form {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+            }
+
+            .booking-card .delete-button {
+                background-color: #f8f9fa;
+                border: none;
+                color: #dc3545;
+                padding: 5px 10px;
+                font-size: 20px;
+                line-height: 1;
+                border-radius: 50%;
+            }
+
+        #email {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 2px solid #007bff;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 24px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            button:hover {
+                background-color: #0069d9;
+            }
+
+        .highlight {
+            background-color: #ffff99; /* light yellow */
+            border: 2px solid #ff9900; /* orange */
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- ======= Header ======= -->
+    <main id="main">
+        <section id="team" class="team">
+            <div class="container aos-init" data-aos="fade-up">
+                <div class="section-header">
+                    <h2>Search Users</h2>
+                </div>
+                <div>
+                    <input type="text" id="email" placeholder="Search by email">
+                    <button onclick="searchByEmail()">Search</button>
+                </div>
+
+                <div class="section-header">
+                    <h2>Users</h2>
+                </div>
+                <div class="row gy-5">
+                    @model IEnumerable<Thesis_web.Data.Signups>
+                    @if (Model != null)
+                    {
+                        foreach (var users in Model)
+                        {
+                            <div class="col-lg-4 col-md-6 member aos-init booking-card" id="@users.Email">
+                                <div class="member-info">
+                                    <h4>Name: @users.Name</h4>
+                                    <span>Email: @users.Email</span>
+                                    <p>Password: @users.Password</p>
+                                    <p>Role: @users.Role</p>
+                                    <form asp-action="DeleteUser" asp-controller="Home" asp-route-id="@users.Id" method="post" class="delete-form">
+                                        <button type="submit" class="btn btn-danger delete-button">X</button>
+                                    </form>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </section>
+
+        <script>
+            function searchByEmail() {
+                var email = document.getElementById('email').value;
+                var userDiv = document.getElementById(email);
+                if (userDiv) {
+                    userDiv.scrollIntoView();
+                    userDiv.classList.add('highlight');
+                    setTimeout(function () {
+                        userDiv.classList.remove('highlight');
+                    }, 2000); // Remove highlight after 5 seconds
+                } else {
+                    alert('No user found with that email');
+                }
+            }
+
+        </script>
+    </main>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Initialize AOS -->
+    <script>
+        AOS.init();
+    </script>
+</body>
+</html>

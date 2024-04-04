@@ -1,0 +1,157 @@
+﻿@{
+    ViewBag.Title = "Applicants";
+    ViewBag.ShowBreadcrumbs = true;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        .portfolio-flters {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+            margin-block-end: 30px;
+        }
+
+        .filter-button {
+            display: inline-block;
+            margin: 0 15px;
+            padding: 10px 20px;
+            background: #fff;
+            border: 2px solid #feb900; /* changed from #ffff00 to #feb900 */
+            border-radius: 50px;
+            color: black;
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+            .filter-button:hover, .filter-button.filter-active {
+                background: #feb900; /* changed from #ffff00 to #feb900 */
+                color: #fff;
+            }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- ======= Header ======= -->
+
+
+    <main id="main">
+
+        <section id="team" class="team">
+            <div class="container aos-init" data-aos="fade-up">
+
+                <div class="section-header">
+                    <h2>Applicants</h2>
+                </div>
+              
+
+                <div class="row gy-5">
+
+                    @model IEnumerable<Thesis_web.Data.Applicants>
+                    @if (Model != null)
+                    {
+                        foreach (var applicants in Model)
+                        {
+                            <div class="col-lg-4 col-md-6 member aos-init member @applicants.Position.ToLower()">
+                                <div class="member-img">
+                                    <img src="@applicants.ImageLink" class="img-fluid" alt=""> <!-- Modify this line -->
+                                    
+                                </div>
+                                <div class="member-info text-center">
+                                    <h4>Name: @applicants.Name</h4>
+                                    <span class="@applicants.Position.ToLower()">Position: @applicants.Position</span>
+                                    <p>Description: @applicants.Description</p>
+
+
+
+                                    @if (applicants.Status == "Pending ⏳")
+
+                                    {
+                                        <div class="status-container">
+                                            <p>Status: @applicants.Status</p>
+                                            <div class="spinner"></div>
+                                            <a href="@Url.Action("Approve", "Applicants", new { id = applicants.Id })">Approve</a>
+                                        </div>
+                                    }
+                                
+                                    else
+                                    {
+                                        <p>Status: @applicants.Status</p>
+                                    }
+
+
+                                    <form asp-action="DeleteApplicant" asp-controller="Workers" asp-route-id="@applicants.Id" method="post" class="delete-form">
+                                        <button type="submit" class="">Delete</button>
+                                    </form>
+
+
+
+                                </div>
+                            </div>
+
+                            <!-- End Team Member -->
+                        }
+                    }
+                    else
+                    {
+                        <p>No applicants found.</p>
+                    }
+                </div>
+                <script>
+                    document.querySelectorAll('.filter-button').forEach(function (button) {
+                        button.addEventListener('click', function () {
+                            var filter = this.dataset.filter;
+                            document.querySelectorAll('.member').forEach(function (member) {
+                                if (filter === 'all' || member.classList.contains(filter)) {
+                                    member.style.display = 'block';
+                                } else {
+                                    member.style.display = 'none';
+                                }
+                            });
+                        });
+                    });
+
+                    document.querySelectorAll('.status-button').forEach(function (button) {
+                        button.addEventListener('click', function () {
+                            var id = this.dataset.id;
+                            var status = this.textContent;
+                            fetch('/ToggleStatus/ToggleStatus/', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({ status: status }),
+                            })
+                                .then(function (response) {
+                                    if (response.ok) {
+                                        location.reload();
+                                    } else {
+                                        alert('Error toggling status.');
+                                    }
+                                });
+                        });
+                    });
+
+
+                </script>
+            </div>
+        </section>
+
+
+        <!-- ======= Our Team Section ======= -->
+
+    </main><!-- End #main -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Initialize AOS -->
+    <script>
+        AOS.init();
+    </script>
+</body>
+</html>

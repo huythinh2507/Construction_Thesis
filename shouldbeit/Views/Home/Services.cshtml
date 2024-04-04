@@ -1,0 +1,426 @@
+﻿@{
+    ViewBag.Title = "Services";
+    ViewBag.ShowBreadcrumbs = true;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <script type="text/javascript">
+        var userId = '@Context.Session.GetString("user_id")';
+    </script>
+
+
+
+</head>
+
+<body>
+
+  
+        <!-- ======= Services Section ======= -->
+        <section id="services" class="services section-bg">
+            <div class="container aos-init aos-animate" data-aos="fade-up">
+
+                <div class="section-header">
+                    <h2>Services</h2>
+                    <p> What we offer?</p>
+
+                </div>
+
+                <div class="row gy-4">
+
+
+                    <div class="col-lg-4 col-md-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+                        <div class="service-item position-relative">
+                            <div class="icon">
+                                <i class="fa-solid fa-arrow-up-from-ground-water"></i>
+                            </div>
+                            <h3>Remodeling</h3>
+                            <p>This is the process of changing the structure or form of something, often a building.</p>
+                        <a href="@Url.Action("Service_details", "Home")" class="readmore stretched-link">Book Now<i class="bi bi-arrow-right"></i></a>
+                    
+                        
+                        </div>
+                    </div><!-- End Service Item -->
+
+                    <div class="col-lg-4 col-md-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+                        <div class="service-item position-relative">
+                            <div class="icon">
+                                <i class="fa-solid fa-compass-drafting"></i>
+                            </div>
+                            <h3>Design</h3>
+                            <p>This involves creating a plan or convention for the construction of an object or a system.</p>
+                        <a href="@Url.Action("Service_details", "Home")" class="readmore stretched-link">Book Now<i class="bi bi-arrow-right"></i></a>
+
+                        </div>
+                    </div><!-- End Service Item -->
+
+                    <div class="col-lg-4 col-md-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
+                        <div class="service-item position-relative">
+                            <div class="icon">
+                                <i class="fa-solid fa-trowel-bricks"></i>
+                            </div>
+                            <h3>Repair</h3>
+                            <p>This involves fixing or mending a thing suffering from damage or a fault.</p>
+                        <a href="@Url.Action("Service_details", "Home")" class="readmore stretched-link">Book Now<i class="bi bi-arrow-right"></i></a>
+
+                        </div>
+                    </div><!-- End Service Item -->
+
+                    <div class="col-lg-4 col-md-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="500">
+                        <div class="service-item position-relative">
+                            <div class="icon">
+                                <i class="fa-solid fa-helmet-safety"></i>
+                            </div>
+                            <h3>Construction</h3>
+                            <p>
+                                This is the process of building or assembling infrastructure.
+                            </p>
+                        <a href="@Url.Action("Service_details", "Home")" class="readmore stretched-link">Book Now<i class="bi bi-arrow-right"></i></a>
+
+                        </div>
+                    </div><!-- End Service Item -->
+
+
+
+                </div>
+
+            </div>
+        </section><!-- End Services Section -->
+        <!-- ======= Service Cards Section ======= -->
+
+    <div class="section-header-why-us">
+        <h2>Why Choose Us?</h2>
+        <p> What we offer?</p>
+
+    </div>
+        <section id="services-cards" class="services-cards">
+            <div class="container aos-init aos-animate" data-aos="fade-up">
+
+                <div class="row gy-4">
+
+                    <div class="col-lg-3 col-md-6 aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
+                        <h3>Quality Assurance</h3>
+                        <p>Ensures the highest standards in every aspect of our service</p>
+                        <ul class="list-unstyled">
+                            <li><i class="bi bi-check2"></i> <span>Unwavering commitment to quality</span></li>
+                            <li><i class="bi bi-check2"></i> <span>Strives to exceed expectations</span></li>
+                            <li><i class="bi bi-check2"></i> <span>Consistent delivery of high-quality service</span></li>
+                        </ul>
+                    </div><!-- End feature item-->
+
+                    <div class="col-lg-3 col-md-6 aos-init aos-animate" data-aos="zoom-in" data-aos-delay="200">
+                        <h3>Exceptional Customer Service</h3>
+                        <p>Dedicated to providing outstanding service to customers</p>
+
+                        <ul class="list-unstyled">
+                            <li><i class="bi bi-check2"></i> <span>Highly responsive to customer needs</span></li>
+                            <li><i class="bi bi-check2"></i> <span>Reliable service at all times</span></li>
+                            <li><i class="bi bi-check2"></i> <span>Always ready to assist</span></li>
+                        </ul>
+                    </div><!-- End feature item-->
+
+                    <div class="col-lg-3 col-md-6 aos-init aos-animate" data-aos="zoom-in" data-aos-delay="300">
+                        <h3>Expert Execution</h3>
+                        <p>Adept at executing tasks with precision and expertise</p>
+                        <ul class="list-unstyled">
+                            <li><i class="bi bi-check2"></i> <span>Takes pride in workmanship</span></li>
+                            <li><i class="bi bi-check2"></i> <span>Ensures perfection in every task</span></li>
+                            <li><i class="bi bi-check2"></i> <span>Delivers expertly executed services</span></li>
+                        </ul>
+                    </div><!-- End feature item-->
+
+                    <div class="col-lg-3 col-md-6 aos-init aos-animate" data-aos="zoom-in" data-aos-delay="400">
+                        <h3>Sustainable Practices</h3>
+                        <p>Incorporates sustainable practices into services</p>
+                        <ul class="list-unstyled">
+                            <li><i class="bi bi-check2"></i> <span>Committed to sustainability</span></li>
+                            <li><i class="bi bi-check2"></i> <span>Cares for the environment</span></li>
+                            <li><i class="bi bi-check2"></i> <span>Promotes eco-friendly practices</span></li>
+                        </ul>
+                    </div><!-- End feature item-->
+
+                </div>
+
+            </div>
+        </section><!-- End Servie Cards Section -->
+        <!-- ======= Alt Services Section 2 ======= -->
+        <section id="alt-services-2" class="alt-services section-bg">
+            <div class="container aos-init" data-aos="fade-up">
+
+                <div class="row justify-content-around gy-4">
+                    <div class="col-lg-5 d-flex flex-column justify-content-center">
+                        <h3>Leading the Way in Construction Innovation</h3>
+                        <p>We strive to provide the best solutions for your construction needs. Our commitment to excellence and customer satisfaction sets us apart in the industry.</p>
+
+                        <div class="icon-box d-flex position-relative aos-init" data-aos="fade-up" data-aos-delay="100">
+                            <i class="bi bi-easel flex-shrink-0"></i>
+                            <div>
+                                <h4><a href="" class="stretched-link">Quality Equipment</a></h4>
+                                <p>We offer a wide range of high-quality construction equipment to ensure your project's success.</p>
+                            </div>
+                        </div><!-- End Icon Box -->
+
+                        <div class="icon-box d-flex position-relative aos-init" data-aos="fade-up" data-aos-delay="200">
+                            <i class="bi bi-patch-check flex-shrink-0"></i>
+                            <div>
+                                <h4><a href="" class="stretched-link">Reliable Service</a></h4>
+                                <p>We pride ourselves on our reliable service and commitment to customer satisfaction.</p>
+                            </div>
+                        </div><!-- End Icon Box -->
+
+                        <div class="icon-box d-flex position-relative aos-init" data-aos="fade-up" data-aos-delay="300">
+                            <i class="bi bi-brightness-high flex-shrink-0"></i>
+                            <div>
+                                <h4><a href="" class="stretched-link">Innovative Solutions</a></h4>
+                                <p>We continuously innovate to provide the most effective solutions for your construction needs.</p>
+                            </div>
+                        </div><!-- End Icon Box -->
+
+                        <div class="icon-box d-flex position-relative aos-init" data-aos="fade-up" data-aos-delay="400">
+                            <i class="bi bi-brightness-high flex-shrink-0"></i>
+                            <div>
+                                <h4><a href="" class="stretched-link">Customer Satisfaction</a></h4>
+                                <p>Your satisfaction is our top priority. We strive to exceed your expectations in every aspect of our service.</p>
+                            </div>
+                        </div><!-- End Icon Box -->
+                    </div>
+
+
+                    <div class="col-lg-6 img-bg aos-init" style="background-image: url('/images/alt-services-2.jpg');" data-aos="zoom-in" data-aos-delay="100"></div>
+                </div>
+
+            </div>
+        </section><!-- End Alt Services Section 2 -->
+        <!-- ======= Alt Services Section ======= -->
+        <section id="alt-services" class="alt-services">
+            <div class="container aos-init aos-animate" data-aos="fade-up">
+
+                <div class="row justify-content-around gy-4">
+                    <div class="col-lg-6 img-bg aos-init aos-animate" style="background-image: url('/images/alt-services.jpg');" data-aos="zoom-in" data-aos-delay="100"></div>
+
+                    <div class="col-lg-5 d-flex flex-column justify-content-center">
+                        <h3>Building the Future</h3>
+                        <p>Our team of dedicated construction workers, clad in blue uniforms and yellow hard hats, are diligently working on our latest project. With their tools in hand, they are ready to tackle any challenge that comes their way</p>
+
+                        <div class="icon-box d-flex position-relative aos-init" data-aos="fade-up" data-aos-delay="100">
+                            <i class="bi bi-easel flex-shrink-0"></i>
+                            <div>
+                                <h4><a href="" class="stretched-link">Innovative Design</a></h4>
+                                <p>Our team utilizes the latest technology to bring our designs to life. With a laptop at their disposal, they can access real-time data and make necessary adjustments on the spot.</p>
+                            </div>
+                        </div><!-- End Icon Box -->
+
+                        <div class="icon-box d-flex position-relative aos-init" data-aos="fade-up" data-aos-delay="200">
+                            <i class="bi bi-patch-check flex-shrink-0"></i>
+                            <div>
+                                <h4><a href="" class="stretched-link">Quality Assurance</a></h4>
+                                <p>We take pride in our attention to detail. Our team members, like Raj and Midas, ensure that every aspect of the construction process is meticulously checked and double-checked.</p>
+                            </div>
+                        </div><!-- End Icon Box -->
+
+                        <div class="icon-box d-flex position-relative aos-init" data-aos="fade-up" data-aos-delay="300">
+                            <i class="bi bi-alarm flex-shrink-0"></i>
+                            <div>
+                                <h4><a href="" class="stretched-link">Efficient Execution</a></h4>
+                                <p>Our team is committed to delivering projects on time without compromising on quality. They work tirelessly against the backdrop of the clear blue sky, symbolizing our limitless potential and commitment to excellence.</p>
+                            </div>
+                        </div><!-- End Icon Box -->
+
+                        <div class="icon-box d-flex position-relative aos-init" data-aos="fade-up" data-aos-delay="400">
+                            <i class="bi bi-tree flex-shrink-0"></i>
+                            <div>
+                                <h4><a href="" class="stretched-link">Sustainable Construction</a></h4>
+                                <p>We believe in creating structures that are not only aesthetically pleasing but also environmentally friendly. Our team is trained to implement sustainable practices in all our projects, contributing to a greener future.</p>
+                            </div>
+                        </div><!-- End Icon Box -->
+
+                    </div>
+                </div>
+
+            </div>
+        </section><!-- End Alt Services Section -->
+        <!-- ======= Testimonials Section ======= -->
+        <section id="testimonials" class="testimonials section-bg">
+            <div class="container aos-init" data-aos="fade-up">
+
+                <div class="section-header">
+                    <h2>Client Testimonials</h2>
+                    <p>Here's what our clients have to say about us. Their feedback and satisfaction are a testament to our commitment to providing the best service in the construction rental industry.</p>
+                </div>
+
+                <div class="slides-2 swiper swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden">
+                    <div class="swiper-wrapper" id="swiper-wrapper-bc3dc9267cbe0c12" aria-live="off" style="transform: translate3d(-956px, 0px, 0px); transition-duration: 0ms;">
+                        <div class="swiper-slide swiper-slide-duplicate swiper-slide-prev" role="group" aria-label="5 / 5" style="width: 936px; margin-right: 20px;" data-swiper-slide-index="4">
+                            <div class="testimonial-wrap">
+                                <div class="testimonial-item">
+                                    <img src="/images/testimonials-1.jpg" class="testimonial-img" alt="">
+                                    <h3>John Larson</h3>
+                                    <h4>Entrepreneur</h4>
+                                    <div class="stars">
+                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                    </div>
+                                    <p>
+                                        <i class="bi bi-quote quote-icon-left"></i>
+                                        I’ve been using this platform for all my construction rental needs for the past year, and I couldn’t be happier. The equipment is top-notch, and the customer service is excellent. They really go above and beyond to make sure you have what you need.
+                                        <i class="bi bi-quote quote-icon-right"></i>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 5" style="width: 936px; margin-right: 20px;" data-swiper-slide-index="0">
+                            <div class="testimonial-wrap">
+                                <div class="testimonial-item">
+                                    <img src="/images/testimonials-2.jpg" class="testimonial-img" alt="">
+                                    <h3>Saul Goodman</h3>
+                                    <h4>Ceo &amp; Founder</h4>
+                                    <div class="stars">
+                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                    </div>
+                                    <p>
+                                        <i class="bi bi-quote quote-icon-left"></i>
+                                        As a small construction business owner, this platform has been a game-changer for me. It’s so easy to find and rent the equipment I need. Plus, the prices are very competitive. Highly recommended!
+                                        <i class="bi bi-quote quote-icon-right"></i>
+                                    </p>
+                                </div>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                        <div class="swiper-slide swiper-slide-next" role="group" aria-label="2 / 5" style="width: 936px; margin-right: 20px;" data-swiper-slide-index="1">
+                            <div class="testimonial-wrap">
+                                <div class="testimonial-item">
+                                    <img src="/images/testimonials-3.jpg" class="testimonial-img" alt="">
+                                    <h3>Sara Wilsson</h3>
+                                    <h4>Designer</h4>
+                                    <div class="stars">
+                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                    </div>
+                                    <p>
+                                        <i class="bi bi-quote quote-icon-left"></i>
+                                        What sets this platform apart is their commitment to customer satisfaction. I had an issue with a piece of equipment I rented, and their team resolved it quickly and professionally. I’m definitely a loyal customer now.
+                                        <i class="bi bi-quote quote-icon-right"></i>
+                                    </p>
+                                </div>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                        <div class="swiper-slide" role="group" aria-label="3 / 5" style="width: 936px; margin-right: 20px;" data-swiper-slide-index="2">
+                            <div class="testimonial-wrap">
+                                <div class="testimonial-item">
+                                    <img src="/images/testimonials-4.jpg" class="testimonial-img" alt="">
+                                    <h3>Jena Karlis</h3>
+                                    <h4>Store Owner</h4>
+                                    <div class="stars">
+                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                    </div>
+                                    <p>
+                                        <i class="bi bi-quote quote-icon-left"></i>
+                                        I’ve tried other construction rental platforms before, but none of them compare to this one. The range of equipment available is impressive, and everything is always in excellent condition. Keep up the good work!
+                                        <i class="bi bi-quote quote-icon-right"></i>
+                                    </p>
+                                </div>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                        <div class="swiper-slide" role="group" aria-label="4 / 5" style="width: 936px; margin-right: 20px;" data-swiper-slide-index="3">
+                            <div class="testimonial-wrap">
+                                <div class="testimonial-item">
+                                    <img src="/images/testimonials-5.jpg" class="testimonial-img" alt="">
+                                    <h3>Matt Brandon</h3>
+                                    <h4>Freelancer</h4>
+                                    <div class="stars">
+                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                    </div>
+                                    <p>
+                                        <i class="bi bi-quote quote-icon-left"></i>
+                                        This platform has made my job so much easier. I can find and book the equipment I need in minutes, and I know I can rely on their quality and service. It’s a huge time-saver.
+                                        <i class="bi bi-quote quote-icon-right"></i>
+                                    </p>
+                                </div>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                        <div class="swiper-slide swiper-slide-duplicate-prev" role="group" aria-label="5 / 5" style="width: 936px; margin-right: 20px;" data-swiper-slide-index="4">
+                            <div class="testimonial-wrap">
+                                <div class="testimonial-item">
+                                    <img src="/images/testimonials-5.jpg" class="testimonial-img" alt="">
+                                    <h3>John Larson</h3>
+                                    <h4>Entrepreneur</h4>
+                                    <div class="stars">
+                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                    </div>
+                                    <p>
+                                        <i class="bi bi-quote quote-icon-left"></i>
+                                        As a contractor, I appreciate the wide variety of equipment available for rent on this platform. The quality of the equipment is always reliable, and the rental process is seamless. It’s clear that customer satisfaction is their top priority.
+                                        <i class="bi bi-quote quote-icon-right"></i>
+                                    </p>
+                                </div>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                        <div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active" role="group" aria-label="1 / 5" style="width: 936px; margin-right: 20px;" data-swiper-slide-index="0">
+                            <div class="testimonial-wrap">
+                                <div class="testimonial-item">
+                                    <img src="/images/testimonials-1.jpg" class="testimonial-img" alt="">
+                                    <h3>Saul Goodman</h3>
+                                    <h4>Ceo &amp; Founder</h4>
+                                    <div class="stars">
+                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                    </div>
+                                    <p>
+                                        <i class="bi bi-quote quote-icon-left"></i>
+                                        This platform has truly revolutionized the way we handle our construction projects. The ease of renting equipment has saved us time and resources. The team is always helpful and prompt in their service.
+                                        <i class="bi bi-quote quote-icon-right"></i>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1" aria-current="true"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 4"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 5"></span></div>
+                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                </div>
+
+            </div>
+        </section><!-- End Testimonials Section -->
+   
+    </main><!-- End #main -->
+    
+
+    <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+
+
+    <!-- Vendor JS Files -->
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/glightbox.min.js"></script>
+    <script src="/js/isotope.pkgd.min.js"></script>
+    <script src="/js/swiper-bundle.min.js"></script>
+    <script src="/js/purecounter_vanilla.js"></script>
+    <script src="/js/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.services-list a').click(function () {
+                var tab_id = $(this).attr('href');
+
+                // hide all tab content
+                $('.tab-content').hide();
+
+                // show clicked tab content
+                $(tab_id).show();
+
+                return false;
+            });
+        });
+    </script>
+    <script src="/js/validate.js"></script>
+
+
+</body>
+</html>

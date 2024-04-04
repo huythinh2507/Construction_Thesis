@@ -1,0 +1,860 @@
+﻿@{
+    ViewBag.Title = "Service Details";
+    ViewBag.ShowBreadcrumbs = true;
+}
+<html lang="en">
+<head>
+    <style>
+        .btn-primary {
+            background-color: #007bff; /* Blue */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+            transition-duration: 0.4s; /* Add a transition effect */
+            border-radius: 8px; /* Add rounded corners */
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 3px 10px 0 rgba(0,0,0,0.19); /* Add a shadow effect */
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3; /* Darker Blue */
+                color: white;
+            }
+
+        .tab-content {
+            display: none;
+        }
+
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+        }
+        .book-now-button {
+            background-color: #FEB900; /* Brown */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            transition-duration: 0.4s; /* Add a transition effect */
+            border-radius: 12px; /* Add rounded corners */
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); /* Add a shadow effect */
+        }
+
+            .book-now-button:hover {
+                background-color: darkcyan; /* Darker Brown */
+                color: white;
+            }
+
+        .promo-code-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .form-control {
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+        .check-promo-button {
+            background-color: #007bff; /* Blue */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+            transition-duration: 0.4s; /* Add a transition effect */
+            border-radius: 8px; /* Add rounded corners */
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 3px 10px 0 rgba(0,0,0,0.19); /* Add a shadow effect */
+        }
+
+            .check-promo-button:hover {
+                background-color: #0056b3; /* Darker Blue */
+                color: white;
+            }
+
+        .modal-body {
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+            .form-group label {
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
+        .modal-footer {
+            background-color: #f5f5f5;
+            padding: 10px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+            .modal-footer button {
+                margin-left: 10px;
+            }
+
+        .btn-primary {
+            color: white;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-secondary {
+            color: white;
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+        .text-container {
+            position: relative;
+            display: inline-block;
+        }
+
+            .text-container:hover .text-content {
+                visibility: visible;
+            }
+
+        .text-content {
+            visibility: hidden;
+            position: absolute;
+            top: -50px; /* Adjust as needed */
+            max-width: 800px; /* Adjust as needed */
+            max-height: 800px; /* Adjust as needed */
+            overflow: auto; /* Adds scrollbars if content exceeds max-width/height */
+            white-space: normal; /* Allows text to wrap to next line */
+            background-color: #f9f9f9;
+            color: black;
+            text-align: center;
+            padding: 5px;
+            border-radius: 6px;
+            z-index: 1;
+        }
+
+
+
+
+
+        .circle {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 15px;
+            color: #fff;
+            line-height: 20px;
+            text-align: center;
+            background: black;
+            display: inline-block;
+        }
+
+    </style>
+    </head>
+<body>
+    <main id="main">
+        <!-- ======= Service Details Section ======= -->
+        <section id="service-details" class="service-details">
+            <div class="container aos-init aos-animate" data-aos="fade-up" data-aos-delay="5500">
+                <div class="section-header">
+                    <h2>Details of our services</h2>
+                    <p>What we do for each kind of service</p>
+
+                </div>
+                <div class="row gy-4">
+
+                    <div class="col-lg-4">
+                        <div class="services-list">
+                            <a href="#remodeling" id="remodelingTab">Remodeling</a>
+                            <a href="#construction">Construction</a>
+                            <a href="#repairs">Repairs</a>
+                            <a href="#design">Design</a>
+                        </div>
+
+                        <h4>Our Services</h4>
+                        <p>We provide a range of services to meet all your construction needs. From remodeling to repairs, our team of skilled workers are ready to help.</p>
+                        
+                        <button type="button" class="btn book-now-button" data-toggle="modal" data-target="#myModal">
+                            Book Now
+                        </button>
+                    </div>
+                    <div id="remodeling" class="tab-content col-lg-8" data-aos="fade-right">
+                        <img src="/images/services.jpg" alt="" class="img-fluid services-img">
+                        <h3>Remodeling Services</h3>
+                        <p>
+                            Our remodeling services are designed to transform your space into something new and fresh. Whether it's a home or office, our team can help redesign and reconstruct your space to better suit your needs.
+                        </p>
+                        <ul>
+                            <li><i class="bi bi-check-circle"></i> <span>Complete remodeling services for homes and offices.</span></li>
+                            <li><i class="bi bi-check-circle"></i> <span>Experienced team of construction workers and designers.</span></li>
+                            <li><i class="bi bi-check-circle"></i> <span>High-quality materials and tools for a durable finish.</span></li>
+                        </ul>
+                        <p>
+                            We understand that remodeling can be a big decision. That's why we work closely with you to understand your needs and preferences. Our team is committed to delivering a result that you'll love.
+                        </p>
+                        <p>
+                            If you're looking to breathe new life into your space, our remodeling services might be just what you need. Contact us today to learn more about our services and how we can help you create the space you've always wanted.
+                        </p>
+                    </div>
+
+                    <div id="construction" class="tab-content col-lg-8">
+                        <img src="/images/construction-1.jpg" alt="" class="img-fluid services-img">
+                        <h3>Construction Services</h3>
+                        <p>
+                            Our construction services cover a wide range of projects, including residential, commercial, and industrial buildings. With a team of experienced workers and high-quality materials, we ensure every construction project is completed to the highest standard.
+                        </p>
+                        <ul>
+                            <li><i class="bi bi-check-circle"></i> <span>Comprehensive construction services for various types of buildings.</span></li>
+                            <li><i class="bi bi-check-circle"></i> <span>Experienced team of construction workers ensuring quality work.</span></li>
+                            <li><i class="bi bi-check-circle"></i> <span>Use of high-quality materials for durability and safety.</span></li>
+                        </ul>
+                        <p>
+                            We understand that construction projects can be complex and stressful. That's why we handle all aspects of the project, from planning to execution, ensuring a smooth process and successful completion.
+                        </p>
+                        <p>
+                            If you're planning a construction project and need reliable, professional service, don't hesitate to contact us. We're here to bring your vision to life.
+                        </p>
+                    </div>
+
+                    <div id="product-management" class="tab-content col-lg-8">
+                        <img src="/images/design-1.jpg" alt="" class="img-fluid services-img">
+                        <h3>Product Management Services</h3>
+                        <p>
+                            Our product management services are designed to ensure that your construction project is completed on time and within budget. We coordinate all aspects of the project, from sourcing materials to scheduling workers, to ensure everything runs smoothly.
+                        </p>
+                        <ul>
+                            <li><i class="bi bi-check-circle"></i> <span>Effective coordination of all aspects of the construction project.</span></li>
+                            <li><i class="bi bi-check-circle"></i> <span>Expertise in sourcing high-quality materials at competitive prices.</span></li>
+                            <li><i class="bi bi-check-circle"></i> <span>Proven strategies for keeping projects on schedule and within budget.</span></li>
+                        </ul>
+                        <p>
+                            With our product management services, you can focus on the bigger picture while we handle the day-to-day details of your construction project.
+                        </p>
+                        <p>
+                            If you're looking for a partner to help manage your construction project, we're here to help. Contact us today to learn more about our product management services.
+                        </p>
+                    </div>
+
+                    <div id="repairs" class="tab-content col-lg-8" >
+                        <img src="/images/design-2.jpg" alt="" class="img-fluid services-img">
+                        <h3>Repair Services</h3>
+                        <p>
+                            Our repair services are designed to fix any issues you may have with your building. From minor fixes to major repairs, our team of skilled workers can handle it all.
+                        </p>
+                        <ul>
+                            <li><i class="bi bi-check-circle"></i> <span>Comprehensive repair services for various types of buildings.</span></li>
+                            <li><i class="bi bi-check-circle"></i> <span>Experienced team of construction workers ensuring quality repairs.</span></li>
+                            <li><i class="bi bi-check-circle"></i> <span>Quick and efficient service to minimize disruption.</span></li>
+                        </ul>
+                        <p>
+                            We understand that repairs can be disruptive and inconvenient. That's why we work quickly and efficiently to get the job done with minimal disruption to your daily routine.
+                        </p>
+                        <p>
+                            If you're in need of repair services, don't hesitate to contact us. We're here to help you maintain your building and keep it in the best possible condition.
+                        </p>
+                    </div>
+
+                    <div id="design" class="tab-content col-lg-8">
+                        <img src="/images/construction-1.jpg" alt="" class="img-fluid services-img">
+                        <h3>Design Services</h3>
+                        <p>
+                            Our design services are all about creating spaces that are not only functional but also aesthetically pleasing. We work with you to understand your needs and preferences, and then create a design that reflects your vision.
+                        </p>
+                        <ul>
+                            <li><i class="bi bi-check-circle"></i> <span>Custom design services tailored to your needs and preferences.</span></li>
+                            <li><i class="bi bi-check-circle"></i> <span>Experienced designers who can bring your vision to life.</span></li>
+                            <li><i class="bi bi-check-circle"></i> <span>Use of the latest design trends and techniques.</span></li>
+                        </ul>
+                        <p>
+                            We believe that good design is about more than just looks. It's about creating spaces that work for you and make your life easier.
+                        </p>
+                        <p>
+                            If you're looking to redesign your space or start a new construction project, our design services can help you create a space that you'll love. Contact us today to learn more about our design services.
+                        </p>
+                    </div>
+
+                    </div>
+                </div>
+
+        </section><!-- End Service Details Section -->
+        <!-- ======= Testimonials Section ======= -->
+        <section id="testimonials" class="testimonials section-bg">
+            <div class="container aos-init" data-aos="fade-up" data-aos-delay="500">
+
+                <div class="section-header">
+                    <h2>Client Testimonials</h2>
+                    <p>Here's what our clients have to say about us. Their feedback and satisfaction are a testament to our commitment to providing the best service in the construction rental industry.</p>
+                </div>
+
+                <div class="slides-2 swiper swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden">
+                    <div class="swiper-wrapper" id="swiper-wrapper-bc3dc9267cbe0c12" aria-live="off" style="transform: translate3d(-956px, 0px, 0px); transition-duration: 0ms;">
+                        <div class="swiper-slide swiper-slide-duplicate swiper-slide-prev" role="group" aria-label="5 / 5" style="width: 936px; margin-right: 20px;" data-swiper-slide-index="4">
+                            <div class="testimonial-wrap">
+                                <div class="testimonial-item">
+                                    <img src="/images/testimonials-1.jpg" class="testimonial-img" alt="">
+                                    <h3>John Larson</h3>
+                                    <h4>Entrepreneur</h4>
+                                    <div class="stars">
+                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                    </div>
+                                    <p>
+                                        <i class="bi bi-quote quote-icon-left"></i>
+                                        I’ve been using this platform for all my construction rental needs for the past year, and I couldn’t be happier. The equipment is top-notch, and the customer service is excellent. They really go above and beyond to make sure you have what you need.
+                                        <i class="bi bi-quote quote-icon-right"></i>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 5" style="width: 936px; margin-right: 20px;" data-swiper-slide-index="0">
+                            <div class="testimonial-wrap">
+                                <div class="testimonial-item">
+                                    <img src="/images/testimonials-2.jpg" class="testimonial-img" alt="">
+                                    <h3>Saul Goodman</h3>
+                                    <h4>Ceo &amp; Founder</h4>
+                                    <div class="stars">
+                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                    </div>
+                                    <p>
+                                        <i class="bi bi-quote quote-icon-left"></i>
+                                        As a small construction business owner, this platform has been a game-changer for me. It’s so easy to find and rent the equipment I need. Plus, the prices are very competitive. Highly recommended!
+                                        <i class="bi bi-quote quote-icon-right"></i>
+                                    </p>
+                                </div>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                        <div class="swiper-slide swiper-slide-next" role="group" aria-label="2 / 5" style="width: 936px; margin-right: 20px;" data-swiper-slide-index="1">
+                            <div class="testimonial-wrap">
+                                <div class="testimonial-item">
+                                    <img src="/images/testimonials-3.jpg" class="testimonial-img" alt="">
+                                    <h3>Sara Wilsson</h3>
+                                    <h4>Designer</h4>
+                                    <div class="stars">
+                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                    </div>
+                                    <p>
+                                        <i class="bi bi-quote quote-icon-left"></i>
+                                        What sets this platform apart is their commitment to customer satisfaction. I had an issue with a piece of equipment I rented, and their team resolved it quickly and professionally. I’m definitely a loyal customer now.
+                                        <i class="bi bi-quote quote-icon-right"></i>
+                                    </p>
+                                </div>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                        <div class="swiper-slide" role="group" aria-label="3 / 5" style="width: 936px; margin-right: 20px;" data-swiper-slide-index="2">
+                            <div class="testimonial-wrap">
+                                <div class="testimonial-item">
+                                    <img src="/images/testimonials-4.jpg" class="testimonial-img" alt="">
+                                    <h3>Jena Karlis</h3>
+                                    <h4>Store Owner</h4>
+                                    <div class="stars">
+                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                    </div>
+                                    <p>
+                                        <i class="bi bi-quote quote-icon-left"></i>
+                                        I’ve tried other construction rental platforms before, but none of them compare to this one. The range of equipment available is impressive, and everything is always in excellent condition. Keep up the good work!
+                                        <i class="bi bi-quote quote-icon-right"></i>
+                                    </p>
+                                </div>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                        <div class="swiper-slide" role="group" aria-label="4 / 5" style="width: 936px; margin-right: 20px;" data-swiper-slide-index="3">
+                            <div class="testimonial-wrap">
+                                <div class="testimonial-item">
+                                    <img src="/images/testimonials-5.jpg" class="testimonial-img" alt="">
+                                    <h3>Matt Brandon</h3>
+                                    <h4>Freelancer</h4>
+                                    <div class="stars">
+                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                    </div>
+                                    <p>
+                                        <i class="bi bi-quote quote-icon-left"></i>
+                                        This platform has made my job so much easier. I can find and book the equipment I need in minutes, and I know I can rely on their quality and service. It’s a huge time-saver.
+                                        <i class="bi bi-quote quote-icon-right"></i>
+                                    </p>
+                                </div>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+
+
+
+                    </div>
+                    <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1" aria-current="true"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 4"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 5"></span></div>
+                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                </div>
+
+            </div>
+        </section><!-- End Testimonials Section -->
+        <section id="stats-counter" class="stats-counter section-bg" data-aos="zoom-in">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Stats don't lie</h2>
+                    <p>
+                        With many years of experience in the field, ConstructConnect is proud to be the best and most convenient rental platform solution for Vietnamese construction workers.
+                    </p>
+                </div>
+                <div class="row gy-4">
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stats-item d-flex align-items-center w-100 h-100">
+                            <i class="bi bi-emoji-smile color-blue flex-shrink-0"></i>
+                            <div>
+                                <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter">0</span>
+                                <p>Happy Clients</p>
+                            </div>
+                        </div>
+                    </div><!-- End Stats Item -->
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stats-item d-flex align-items-center w-100 h-100">
+                            <i class="bi bi-journal-richtext color-orange flex-shrink-0"></i>
+                            <div>
+                                <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter">0</span>
+                                <p>Projects</p>
+                            </div>
+                        </div>
+                    </div><!-- End Stats Item -->
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stats-item d-flex align-items-center w-100 h-100">
+                            <i class="bi bi-headset color-green flex-shrink-0"></i>
+                            <div>
+                                <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1" class="purecounter">0</span>
+                                <p>Hours Of Support</p>
+                            </div>
+                        </div>
+                    </div><!-- End Stats Item -->
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stats-item d-flex align-items-center w-100 h-100">
+                            <i class="bi bi-people color-pink flex-shrink-0"></i>
+                            <div>
+                                <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter">0</span>
+                                <p>Hard Workers</p>
+                            </div>
+                        </div>
+                    </div><!-- End Stats Item -->
+
+                </div>
+
+            </div>
+        </section><!-- End Stats Counter Section -->
+
+        <div class="modal" tabindex="-1" role="dialog" id="myModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="bookingModalLabel">Booking Service</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                            <form asp-action="BookingRequest" id="myForm" asp-controller="Contact" method="post" onsubmit="return validateForm()">
+                            <!-- Service Type -->
+                            <div class="form-group">
+                                <label for="ServiceType">Service Type</label>
+                                <select class="form-control" id="ServiceType" name="ServiceType">
+                                    <option>Remodeling</option>
+                                    <option>Construction</option>
+                                    <option>Repairs</option>
+                                    <option>Design</option>
+                                </select>
+                            </div>
+
+                            <!-- Location -->
+                            <div class="form-group">
+                                <label for="Location">Location</label>
+                                <input type="text" class="form-control" id="Location" name="Location" placeholder="The working location" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Phone">Phone</label>
+                                <input type="number" class="form-control" id="Phone" name="Phone" placeholder="Your phone number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+                            </div>
+
+                            <!-- Required Workers -->
+                            <div class="form-group">
+                                <label for="Workers">
+                                    Workers
+                                    <a href="@Url.Action("Workers", "Workers")"> <i class="bi bi-arrow-right"></i> </a>
+
+                                </label>
+                                <input type="text" class="form-control" id="Workers" name="Workers" readonly>
+                            </div>
+
+                            <!-- Working Hours -->
+                            <div class="form-group">
+                                <label for="WorkingTime">Working Hours</label>
+                                <input type="range" class="form-control-range" id="WorkingTime" name="WorkingTime" min="1" max="6" step="0.5" value="1" oninput="updateWorkingTimeLabel(value); updateWorkingTimeRange(); calculateTotal()" required>
+                                <span id="workingTimeLabel">1 hour</span>
+                            </div>
+
+                            <!-- Date -->
+                            <div class="form-group">
+                                <label for="WorkDate">Work Date</label>
+                                <input type="date" class="form-control" id="WorkDate" name="WorkDate" required>
+                            </div>
+
+                            <!-- Time -->
+                            <div class="form-group">
+                                <label for="StartTime">Working Time</label>
+                                <select class="form-control" id="StartTime" name="StartTime" onchange="updateWorkingTimeRange()">
+                                    <option value="08:00">08:00</option>
+                                    <option value="08:30">08:30</option>
+                                    <option value="09:00">09:00</option>
+                                    <option value="09:30">09:30</option>
+                                    <option value="10:00">10:00</option>
+                                    <option value="10:30">10:30</option>
+                                    <option value="11:00">11:00</option>
+                                    <option value="13:00">13:00</option>
+                                    <option value="13:30">13:30</option>
+                                    <option value="14:00">14:00</option>
+                                    <option value="14:30">14:30</option>
+                                    <option value="15:00">15:00</option>
+                                    <option value="15:30">15:30</option>
+                                    <!-- TIME -->
+                                </select>
+                            </div>
+
+                            <!-- Note -->
+                            <div class="form-group">
+                                <label for="Note">Note</label>
+                                <textarea class="form-control" id="Note" name="Note" placeholder="Note for worker(s)" rows="3"></textarea>
+                            </div>
+
+                            <!-- PROMO -->
+                                <div class="form-group">
+                                    <label for="PromoCode">Promotion Code</label>
+                                    <div class="promo-code-container">
+                                    <input type="text" class="form-control" id="PromoCode" name="PromoCode" placeholder="Use ‘giamgia’ to receive a 15% discount. 😊">
+                                    <button type="button" class="check-promo-button" onclick="checkPromoCode(); this.disabled = true;">Check</button>
+
+                                    </div>
+                                    <span id="promoCodeStatus"></span>
+                                </div>
+
+                            <div class="form-group">
+                                <label for="TotalPrice">
+                                    Total
+                                    <span class="circle text-container">
+                                        ?
+                                        <span class="text-content">
+                                            “The price is subject to change based on the operator’s calculations for the actual project.”
+                                        </span>
+                                    </span>
+                                </label>
+                                <input type="text" class="form-control" id="TotalPrice" name="TotalPrice" readonly>
+                                <small class="form-text text-muted">Please note that payment should be made in cash at the end of the working day.</small>
+                            </div>
+                            <!-- Footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#confirmModal" onclick="confirmDetails()">Next</button>
+                            </div>
+                        </form>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmModalLabel">Booking Confirmation</h5>
+                    </div>
+                    <div class="modal-body" id="confirmDetailsBody">
+                        <!-- Details will be filled in by the JavaScript function -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#myModal">Back</button>
+                        <button type="button" class="btn btn-primary" onclick="submitForm()">Confirm</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <script>
+            document.getElementById('Location').addEventListener('input', function (e) {
+                if (!e.target.value) {
+                    e.target.style.border = '1px solid red';
+                } else {
+                    e.target.style.border = '';
+                }
+            });
+            document.getElementById('Phone').addEventListener('input', function (e) {
+                if (!e.target.value) {
+                    e.target.style.border = '1px solid red';
+                } else {
+                    e.target.style.border = '';
+                }
+            });
+
+            function submitForm() {
+                document.getElementById('myForm').submit();
+            }
+            function updateWorkingTimeLabel(value) {
+                document.getElementById('workingTimeLabel').textContent = value + (value > 1 ? ' hours' : ' hour');
+            }
+            function resetStartingTime() {
+                var startTimeSelect = document.getElementById('StartTime');
+                var selectedOption = startTimeSelect.options[startTimeSelect.selectedIndex];
+                selectedOption.text = selectedOption.value;
+            }
+            function updateWorkingTimeRange() {
+                var startTimeSelect = document.getElementById('StartTime');
+                var selectedOption = startTimeSelect.options[startTimeSelect.selectedIndex];
+                var startTime = selectedOption.value;
+                var workingTime = document.getElementById('WorkingTime').value;
+
+                var endTime = new Date(`1970-01-01T${startTime}:00Z`);
+                endTime.setHours(endTime.getHours() + parseFloat(workingTime));
+                endTime.setMinutes(endTime.getMinutes() + (workingTime % 1) * 60);
+
+                var endTimeString = endTime.toISOString().substr(11, 5);
+
+                selectedOption.text = `${startTime} - ${endTimeString}`;
+            }
+            var workerPrices = {
+                "Builder": 120000,
+                "Designer": 150000,
+                "Operator": 100000,
+                "Technician": 130000,
+                "Product Manager": 200000
+            };
+
+            var serviceWorkers = {
+                "Remodeling": { "Builder": 1, "Designer": 1, "Operator": 1 },
+                "Construction": { "Builder": 2, "Operator": 1 },
+                "Repairs": { "Builder": 1, "Operator": 1 },
+                "Design": { "Designer": 1, "Product Manager": 1, "Operator": 1 }
+            };
+          
+            function calculateTotal() {
+                var serviceType = document.getElementById('ServiceType').value;
+                var totalHour = document.getElementById('WorkingTime').value;
+                var workers = serviceWorkers[serviceType];
+                var totalPrice = 0;
+
+                if (serviceType && totalHour && workers) {
+                    totalHour = Number(totalHour);
+                    if (isNaN(totalHour)) {
+                        alert('Working time is not a valid number');
+                        return;
+                    }
+
+                    for (var worker in workers) {
+                        var workerCount = Number(workers[worker]);
+                        var workerPrice = Number(workerPrices[worker]);
+
+                        if (isNaN(workerCount) || isNaN(workerPrice)) {
+                            alert(worker + ' count or price is not a valid number');
+                            return;
+                        }
+
+                        totalPrice += workerCount * totalHour * workerPrice;
+                    }
+
+                    document.getElementById('TotalPrice').value = totalPrice + '₫/' + totalHour + 'h';
+                } else {
+                    alert('Please ensure service type and working time are entered correctly');
+                }
+            }
+
+
+
+            function applyDiscount() {
+                var totalPriceElement = document.getElementById('TotalPrice');
+                var totalHour = document.getElementById('WorkingTime').value;
+                var totalPriceString = totalPriceElement.value.split('₫')[0].replace(/[^0-9.]/g, '');
+                var totalPrice = Number(totalPriceString);
+                var discountedPrice = Math.round(totalPrice * 0.85); // Apply 15% discount
+                totalPriceElement.value = discountedPrice + '₫/' + totalHour + 'h';
+            }
+
+
+
+
+
+            function confirmDetails() {
+                let location = document.getElementById('Location').value;
+                let workingTime = document.getElementById('WorkingTime').value;
+                let hour = document.getElementById('StartTime').value;
+                let note = document.getElementById('Note').value;
+                let phone = document.getElementById('Phone').value;
+                if (note === null || note === '') {
+                    note = "no";
+                }
+                let date = document.getElementById('WorkDate').value;
+                let promocode = document.getElementById('PromoCode').value;
+                if (promocode === null || promocode === '') {
+                    promocode = "no";
+                }
+                let serviceType = document.getElementById('ServiceType').value;
+                let workers = serviceWorkers[serviceType];
+                let totalPrice = document.getElementById('TotalPrice').value;
+
+                let workersString = '';
+                for (var worker in workers) {
+                    workersString += workers[worker] + ' ' + worker + ', ';
+                }
+                // Remove the trailing comma and space
+                workersString = workersString.slice(0, -2);
+
+                let message = "Location: " + location + "<br>" +
+                    "Working Time: " + workingTime + " hour(s)" + "<br>" +
+                    "Starting Hour: " + hour + "<br>" +
+                    "Date: " + date + "<br>" +
+                    "Note: " + note + "<br>" +
+                    "Phone: " + phone + "<br>" +
+                    "Code: " + promocode + "<br>" +
+                    "Workers: " + workersString + "<br>" +
+                    "Total Price: " + totalPrice;
+
+                // Fill in the details in the modal body
+                document.getElementById('confirmDetailsBody').innerHTML = message;
+                
+                // Show the modal
+                $('#confirmModal').modal('show');
+            }
+
+
+            function checkPromoCode() {
+                var promoCode = document.getElementById('PromoCode').value;
+                $.ajax({
+                    url: '/PromoCode/IsPromoCodeAvailable',
+                    type: 'GET',
+                    data: { code: promoCode },
+                    success: function (isAvailable) {
+                        if (isAvailable) {
+                            document.getElementById('promoCodeStatus').innerHTML = "Promo code is available!";
+                            applyDiscount();
+                        }
+                        else {
+                            document.getElementById('promoCodeStatus').innerHTML = "Promo code is not available.";
+                            calculateTotal();
+                        }
+                    }
+                });
+            }
+
+           
+
+            // Update the 'RequiredWorkers' field when 'ServiceType' changes
+            document.getElementById('ServiceType').addEventListener('change', function () {
+                var serviceType = this.value;
+                var workers = serviceWorkers[serviceType];
+                var workersString = '';
+
+                for (var worker in workers) {
+                    workersString += workers[worker] + ' ' + worker + ', ';
+                }
+
+                // Remove the trailing comma and space
+                workersString = workersString.slice(0, -2);
+
+                document.getElementById('Workers').value = workersString;
+            });
+
+            // Trigger the change event
+            document.getElementById('ServiceType').dispatchEvent(new Event('change'));
+
+
+            $(document).ready(function () {
+                $('.services-list a').click(function (e) {
+                    e.preventDefault();
+                    var target = $(this).attr('href');
+                    $(target).fadeIn('slow');
+                });
+            });
+            
+            $(document).ready(function () {
+                $('.services-list a').click(function () {
+                    var tab_id = $(this).attr('href');
+
+                    // hide all tab content
+                    $('.tab-content').hide();
+
+                    // show clicked tab content
+                    $(tab_id).show();
+
+                    return false;
+                });
+            });
+            window.onload = function () {
+                document.getElementById('remodelingTab').click();
+            };
+
+           
+
+        </script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <div class="modal" tabindex="-1" role="dialog" id="confirmModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Confirmation</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Location:</strong> <span id="confirmLocation"></span></p>
+                        <p><strong>Working Time:</strong> <span id="confirmWorkingTime"></span></p>
+                        <p><strong>Hour:</strong> <span id="confirmHour"></span></p>
+                        <p><strong>Note:</strong> <span id="confirmNote"></span></p>
+                        <p><strong>Number of Workers:</strong> <span id="confirmWorkers"></span></p>
+                        <p><strong>Total Price:</strong> <span id="confirmTotalPrice"></span></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Back</button>
+                        <button type="submit" class="btn btn-primary">Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main><!-- End #main -->
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Initialize AOS -->
+    <script>
+        AOS.init();
+    </script>
+   
+</body>
+</html>
